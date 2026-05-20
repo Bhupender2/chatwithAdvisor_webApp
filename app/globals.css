@@ -4,7 +4,7 @@
 
 @custom-variant dark (&:is(.dark *));
 
-// this rule says if the system is in dark mode and no background color is defined and dark mode and its styles will take precedence
+/* // this rule says if the system is in dark mode and no background color is defined and dark mode and its styles will take precedence */
 
 @theme inline {
   --color-background: var(--background);
@@ -121,13 +121,16 @@
 
 @layer base {
   * {
-    @apply border-border outline-ring/50;
+    /* @apply border-border outline-ring/50;  doesnt work beacuse @apply doesnt able to gebnerated utility class so tailwindcss doesnt able to read it and throws error*/
+    border-color: var(--border);
   }
+
   body {
-    @apply bg-background text-foreground;
-    background-color: white; /* Explicitly set the background color to white */
+    background-color: var(--background);
+    color: var(--foreground);
   }
+
   html {
-    @apply font-sans;
+    font-family: var(--font-geist-sans);
   }
 }
