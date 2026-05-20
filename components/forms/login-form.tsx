@@ -21,7 +21,7 @@ export function LoginForm({
 }: React.ComponentProps<"div">) {
   return (
     <div className={cn("flex flex-col gap-6 py-10", className)} {...props}>
-      <Card className="w-110 px-8 py-12">
+      <Card className="w-110 px-4 py-12">
         <CardHeader>
           <CardTitle className="text-xl">Login to your account</CardTitle>
           <CardDescription>
@@ -38,7 +38,7 @@ export function LoginForm({
                   type="text"
                   placeholder="Enter your Employee ID"
                   required
-                  className="py-5"
+                  className="py-5 rounded-full"
                 />
               </Field>
               <Field>
@@ -50,12 +50,12 @@ export function LoginForm({
                   type="password"
                   required
                   placeholder="Enter your password here"
-                  className="py-5"
+                  className="py-5 rounded-full"
                 />
               </Field>
               <Field>
                 <Button
-                  className="bg-indigo-900 py-6 hover:bg-indigo-950"
+                  className="bg-indigo-900 py-6 hover:bg-indigo-950 rounded-full cursor-pointer"
                   type="submit"
                 >
                   Login
