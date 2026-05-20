@@ -4,6 +4,8 @@
 
 @custom-variant dark (&:is(.dark *));
 
+// this rule says if the system is in dark mode and no background color is defined and dark mode and its styles will take precedence
+
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
