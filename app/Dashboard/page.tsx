@@ -1,4 +1,5 @@
 import { AppHeader } from "@/components/dashboard/app-header";
+import ChatArea from "@/components/dashboard/chat-area";
 import DashboardSidebar from "@/components/dashboard/sidebar";
 import { SidebarProvider } from "@/components/ui/sidebar";
 
@@ -10,7 +11,7 @@ export default function Dashboard() {
         <div className="flex flex-1 overflow-hidden">
           <DashboardSidebar />
           <main className="flex-1 overflow-auto">
-            {/* chat area goes here */}
+            <ChatArea />
           </main>
         </div>
       </div>
