@@ -1,5 +1,4 @@
-import { AppHeader } from "@/components/app-header";
-import DashboardSidebar from "@/components/dashboard/sidebar";
+import { AppHeader } from "@/components/dashboard/app-header";
 import { SidebarProvider } from "@/components/ui/sidebar";
 
 export default function Dashboard() {
