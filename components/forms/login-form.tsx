@@ -13,6 +13,8 @@ import { Field, FieldGroup, FieldLabel } from "@/components/ui/field";
 import { Input } from "@/components/ui/input";
 import { useLogin } from "@/hooks/mutations/use-login";
 import { useState } from "react";
+import { toast } from "sonner";
+import { CheckCircle2, CircleAlert } from "lucide-react";
 
 export function LoginForm({
   className,
@@ -35,10 +37,19 @@ export function LoginForm({
   const handleLogin = (e: React.SyntheticEvent<HTMLFormElement>) => {
     e.preventDefault(); // stopping it from reloading
     loginMutation.mutate(employeeData, {
-      onSuccess: () => {
+      onSuccess: (data) => {
         setEmployeeData({
           employeeId: "",
           password: "",
+        });
+        toast.success("Login Successfully", {
+          icon: <CheckCircle2 className="text-green-600" />,
+        });
+      },
+      onError: (error) => {
+        console.error("Error login Failed");
+        toast.error("Login Failed", {
+          icon: <CircleAlert className="text-red-600" />,
         });
       },
     });
