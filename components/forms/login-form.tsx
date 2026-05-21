@@ -103,7 +103,7 @@ export function LoginForm({
                   type="submit"
                   disabled={loginMutation.isPending}
                 >
-                  {loginMutation.isPending ? "Logging In" : "Login"}
+                  {loginMutation.isPending ? "Logging In..." : "Login"}
                 </Button>
               </Field>
             </FieldGroup>
