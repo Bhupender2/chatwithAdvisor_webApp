@@ -1,3 +1,5 @@
+"use client";
+
 import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
 import {
@@ -7,18 +9,21 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
-import {
-  Field,
-  FieldDescription,
-  FieldGroup,
-  FieldLabel,
-} from "@/components/ui/field";
+import { Field, FieldGroup, FieldLabel } from "@/components/ui/field";
 import { Input } from "@/components/ui/input";
+import { useLogin } from "@/hooks/mutations/use-login";
+import { useState } from "react";
 
 export function LoginForm({
   className,
   ...props
 }: React.ComponentProps<"div">) {
+  const [employeeData, setEmployeeData] = useState({
+    employeeId: "",
+    password: "",
+  }); // creating the state here
+
+  const loginMutation = useLogin();
   return (
     <div className={cn("flex flex-col gap-6 py-10", className)} {...props}>
       <Card className="w-110 px-4 py-12">
@@ -39,6 +44,7 @@ export function LoginForm({
                   placeholder="Enter your Employee ID"
                   required
                   className="py-5 rounded-full"
+                  value={employeeData.employeeId}
                 />
               </Field>
               <Field>
@@ -51,6 +57,7 @@ export function LoginForm({
                   required
                   placeholder="Enter your password here"
                   className="py-5 rounded-full"
+                  value={employeeData.password}
                 />
               </Field>
               <Field>
