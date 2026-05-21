@@ -24,6 +24,14 @@ export function LoginForm({
   }); // creating the state here
 
   const loginMutation = useLogin();
+
+  const handleChange = (key: string, value: string) => {
+    setEmployeeData((prev) => ({
+      ...prev,
+      [key]: value,
+    }));
+  };
+
   return (
     <div className={cn("flex flex-col gap-6 py-10", className)} {...props}>
       <Card className="w-110 px-4 py-12">
@@ -45,6 +53,7 @@ export function LoginForm({
                   required
                   className="py-5 rounded-full"
                   value={employeeData.employeeId}
+                  onChange={(e) => handleChange("employeeId", e.target.value)}
                 />
               </Field>
               <Field>
@@ -58,6 +67,7 @@ export function LoginForm({
                   placeholder="Enter your password here"
                   className="py-5 rounded-full"
                   value={employeeData.password}
+                  onChange={(e) => handleChange("password", e.target.value)}
                 />
               </Field>
               <Field>
