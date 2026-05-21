@@ -32,7 +32,7 @@ export function LoginForm({
     }));
   }; // we call it reusable field updater pattern.
 
-  const handleLogin = (e) => {
+  const handleLogin = (e: React.SyntheticEvent<HTMLFormElement>) => {
     e.preventDefault(); // stopping it from reloading
     loginMutation.mutate(employeeData, {
       onSuccess: () => {
