@@ -23,12 +23,12 @@ export default function DashboardSidebar() {
     <Sidebar className="relative h-full" variant="floating" collapsible="icon">
       <SidebarContent>
         <SidebarGroup>
-          <SidebarGroupLabel>Chat Groups</SidebarGroupLabel>
+          {/* <SidebarGroupLabel className="text-lg">Chat Groups</SidebarGroupLabel> */}
           <SidebarMenu>
             {chatGroups.map((group) => {
               const IconComponent = group.icon;
               return (
-                <SidebarMenuItem key={group.id}>
+                <SidebarMenuItem key={group.id} className="py-2">
                   <SidebarMenuButton>
                     <IconComponent className="w-4 h-4" />
                     <span>{group.name}</span>
