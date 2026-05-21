@@ -15,6 +15,7 @@ import { useLogin } from "@/hooks/mutations/use-login";
 import { useState } from "react";
 import { toast } from "sonner";
 import { CheckCircle2, CircleAlert } from "lucide-react";
+import { useRouter } from "next/navigation";
 
 export function LoginForm({
   className,
@@ -26,6 +27,8 @@ export function LoginForm({
   }); // creating the state here
 
   const loginMutation = useLogin();
+
+  const router = useRouter();
 
   const handleChange = (key: string, value: string) => {
     setEmployeeData((prev) => ({
@@ -45,6 +48,7 @@ export function LoginForm({
         toast.success("Login Successfully", {
           icon: <CheckCircle2 className="text-green-600" />,
         });
+        router.push("Dashboard");
       },
       onError: (error) => {
         console.error("Error login Failed");
