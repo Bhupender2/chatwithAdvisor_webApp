@@ -79,8 +79,9 @@ export function LoginForm({
                 <Button
                   className="bg-indigo-900 py-6 hover:bg-indigo-950 rounded-full cursor-pointer"
                   type="submit"
+                  disabled={loginMutation.isPending}
                 >
-                  Login
+                  {loginMutation.isPending ? "Logging In" : "Login"}
                 </Button>
               </Field>
             </FieldGroup>
