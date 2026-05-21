@@ -15,7 +15,14 @@ export default function QueryProvider({
   children: React.ReactNode;
 }) {
   const [queryClient] = useState(() => {
-    return new QueryClient();
+    return new QueryClient({
+      defaultOptions: {
+        queries: {
+          staleTime: 1000 * 60, // 1 min tak fresh data maan lo
+          refetchOnWindowFocus: false, // tab switch karne pe ya window pe wapas aane pe phirse fetch mat karna data (dont call API)
+        },
+      },
+    });
   });
 
   return (
