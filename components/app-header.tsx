@@ -1,0 +1,34 @@
+"use client";
+
+import { SidebarTrigger } from "@/components/ui/sidebar";
+import { Button } from "@/components/ui/button";
+import { LogOut } from "lucide-react";
+import Image from "next/image";
+
+export function AppHeader() {
+  return (
+    <header className="sticky top-0 z-40 w-full p-4">
+      <div className="flex items-center justify-between px-4 rounded-lg border border-gray-700/30  backdrop-blur  w-full py-2">
+        {/* Logo and Mobile Menu */}
+        <div className="flex items-center gap-4">
+          <div className="text-xl font-bold text-indigo-950">
+            <Image src="/logo.png" alt="logo" width={80} height={70} />
+          </div>
+        </div>
+        <div className="flex items-center">
+          <SidebarTrigger className="md:hidden text-indigo-950" />
+
+          {/* Logout Button */}
+          <Button
+            variant="ghost"
+            size="lg"
+            className="flex items-center gap-2 "
+          >
+            <LogOut className="w-4 h-4" />
+            <span>Logout</span>
+          </Button>
+        </div>
+      </div>
+    </header>
+  );
+}
