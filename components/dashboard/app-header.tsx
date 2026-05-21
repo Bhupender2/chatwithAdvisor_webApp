@@ -24,8 +24,8 @@ export function AppHeader() {
             size="lg"
             className="flex items-center gap-2 "
           >
-            <LogOut className="w-4 h-4" />
-            <span>Logout</span>
+            <LogOut className="w-4 h-4 text-indigo-900" />
+            <span className="font-semibold">Logout</span>
           </Button>
         </div>
       </div>
