@@ -34,7 +34,14 @@ export function LoginForm({
 
   const handleLogin = (e) => {
     e.preventDefault(); // stopping it from reloading
-    loginMutation.mutate(employeeData);
+    loginMutation.mutate(employeeData, {
+      onSuccess: () => {
+        setEmployeeData({
+          employeeId: "",
+          password: "",
+        });
+      },
+    });
   };
 
   return (
