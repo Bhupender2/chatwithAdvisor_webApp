@@ -30,6 +30,11 @@ export function LoginForm({
       ...prev,
       [key]: value,
     }));
+  }; // we call it reusable field updater pattern.
+
+  const handleLogin = (e) => {
+    e.preventDefault(); // stopping it from reloading
+    loginMutation.mutate(employeeData);
   };
 
   return (
@@ -42,7 +47,7 @@ export function LoginForm({
           </CardDescription>
         </CardHeader>
         <CardContent>
-          <form>
+          <form onSubmit={handleLogin}>
             <FieldGroup>
               <Field>
                 <FieldLabel htmlFor="email">Employee ID</FieldLabel>
