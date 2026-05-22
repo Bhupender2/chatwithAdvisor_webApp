@@ -11,6 +11,7 @@ import {
   SidebarMenuItem,
 } from "../ui/sidebar";
 import { Database, BookOpen, Users, BarChart3 } from "lucide-react";
+import { Skeleton } from "../ui/skeleton";
 
 export default function DashboardSidebar() {
   const { data: defaultGroups = [], isLoading } = useFetchGroups();
@@ -20,7 +21,7 @@ export default function DashboardSidebar() {
     "NEET PG OD": BookOpen,
     "NEET UG": Users,
     "NEET UG OD": BarChart3, // Add more if needed
-  }; // Yani iconMap ek object hai jisme keys string hain aur values React components hain.
+  }; // Yani iconMap ek object hai jisme keys string hain aur values React components hain. Record ek object type h
 
   console.log("default groups", defaultGroups);
   return (
@@ -28,19 +29,50 @@ export default function DashboardSidebar() {
       <SidebarContent>
         <SidebarGroup>
           {/* <SidebarGroupLabel className="text-lg">Chat Groups</SidebarGroupLabel> */}
-          <SidebarMenu>
-            {defaultGroups.map((group: any) => {
-              const IconComponent = iconMap[group.name] || BarChart3;
-              return (
-                <SidebarMenuItem key={group.conversationId} className="py-2">
-                  <SidebarMenuButton>
-                    <IconComponent className="w-4 h-4" />
-                    <span>{group.name}</span>
-                  </SidebarMenuButton>
-                </SidebarMenuItem>
-              );
-            })}
-          </SidebarMenu>
+          {isLoading ? (
+            <>
+              <div className="flex flex-col w-full space-y-4">
+                <div className="flex items-center gap-2">
+                  <Skeleton className="h-10 w-10 rounded-full bg-gray-200" />
+                  <div className="space-y-2 flex-1">
+                    <Skeleton className="h-10  bg-gray-200 rounded-4xl" />
+                  </div>
+                </div>
+                <div className="flex items-center gap-2">
+                  <Skeleton className="h-10 w-10 rounded-full bg-gray-200" />
+                  <div className="space-y-2 flex-1">
+                    <Skeleton className="h-10  bg-gray-200 rounded-4xl" />
+                  </div>
+                </div>
+                <div className="flex items-center gap-2">
+                  <Skeleton className="h-10 w-10 rounded-full bg-gray-200" />
+                  <div className="space-y-2 flex-1">
+                    <Skeleton className="h-10  bg-gray-200 rounded-4xl" />
+                  </div>
+                </div>
+                <div className="flex items-center gap-2">
+                  <Skeleton className="h-10 w-10 rounded-full bg-gray-200" />
+                  <div className="space-y-2 flex-1">
+                    <Skeleton className="h-10  bg-gray-200 rounded-4xl" />
+                  </div>
+                </div>
+              </div>
+            </>
+          ) : (
+            <SidebarMenu>
+              {defaultGroups.map((group: any) => {
+                const IconComponent = iconMap[group.name] || BarChart3;
+                return (
+                  <SidebarMenuItem key={group.conversationId} className="py-2">
+                    <SidebarMenuButton>
+                      <IconComponent className="w-4 h-4" />
+                      <span>{group.name}</span>
+                    </SidebarMenuButton>
+                  </SidebarMenuItem>
+                );
+              })}
+            </SidebarMenu>
+          )}
         </SidebarGroup>
       </SidebarContent>
     </Sidebar>
