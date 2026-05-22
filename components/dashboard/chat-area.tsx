@@ -1,6 +1,9 @@
+"use client";
+
 import { PlusIcon, SendHorizonalIcon } from "lucide-react";
 import { Card } from "../ui/card";
 import { AddDropDownMenu } from "./add-dropdown-menu";
+import { useChatStore } from "@/store/chat-store";
 
 type ChatMessage = {
   id: string;
@@ -33,6 +36,9 @@ const sampleMessages: ChatMessage[] = [
 ];
 
 export default function ChatArea() {
+  const conversationId = useChatStore((state) => state.conversationId);
+
+  console.log("converationId", conversationId);
   return (
     <div className="flex flex-col gap-4 p-4 h-full">
       {/* Messages */}
