@@ -1,5 +1,6 @@
 import { PlusIcon, SendHorizonalIcon } from "lucide-react";
 import { Card } from "../ui/card";
+import { AddDropDownMenu } from "./add-dropdown-menu";
 
 type ChatMessage = {
   id: string;
@@ -56,7 +57,7 @@ export default function ChatArea() {
 
       {/* Input */}
       <div className="flex gap-2 items-center">
-        <PlusIcon />
+        <AddDropDownMenu />
         <input
           type="text"
           placeholder="Type your message..."
