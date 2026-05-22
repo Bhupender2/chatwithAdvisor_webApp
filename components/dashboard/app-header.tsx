@@ -2,7 +2,7 @@
 
 import { SidebarTrigger } from "@/components/ui/sidebar";
 import { Button } from "@/components/ui/button";
-import { LogOut } from "lucide-react";
+import { CheckCircle2, LogOut } from "lucide-react";
 import Image from "next/image";
 import { useAuthStore } from "@/store/auth-store";
 import { useRouter } from "next/navigation";
@@ -27,16 +27,16 @@ export function AppHeader() {
           <Button
             variant="ghost"
             size="lg"
-            className="flex items-center gap-2 "
+            className="flex items-center gap-2"
+            onClick={() => {
+              clearAuth();
+              router.push("/login");
+              toast.success("Logged out successfully", {
+                icon: <CheckCircle2 className="text-indigo-900" />,
+              });
+            }}
           >
-            <LogOut
-              className="w-4 h-4 text-indigo-900"
-              onClick={() => {
-                clearAuth();
-                router.push("/login");
-                toast.error("Logout SuccessFully");
-              }}
-            />
+            <LogOut className="w-4 h-4 text-indigo-900" />
             <span className="font-semibold">Logout</span>
           </Button>
         </div>
