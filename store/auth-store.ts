@@ -22,13 +22,45 @@ interface AuthState {
 }
 
 export const AuthStore = create<AuthState>()(
-  persist((set) => ({
-    token: null,
-    senderId: null,
-    name: null,
-    role: null,
-    appAccess: null,
-    notificationToken: null,
-    pkg: null,
-  })),
+  persist(
+    (set) => ({
+      token: null,
+      senderId: null,
+      name: null,
+      role: null,
+      appAccess: null,
+      notificationToken: null,
+      pkg: null,
+      setAuth: (token, senderId, name, role, appAccess, pkg) => {
+        set((state) => ({
+          ...state,
+          token: token,
+          senderId: senderId,
+          name: name,
+          role: role,
+          appAccess: appAccess,
+          pkg: pkg,
+        }));
+      },
+
+      setNotificationToken: (notificationToken) =>
+        set({
+          notificationToken,
+        }),
+
+      clearAuth: () => {
+        set({
+          token: null,
+          senderId: null,
+          name: null,
+          role: null,
+          appAccess: null,
+          pkg: null,
+        });
+      },
+    }),
+    {
+      name: "auth-storage", // name of the storage where we store this data
+    },
+  ),
 );
