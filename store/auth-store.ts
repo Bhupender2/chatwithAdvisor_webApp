@@ -64,3 +64,5 @@ export const AuthStore = create<AuthState>()(
     },
   ),
 );
+
+//// Yeh syntax mein pehle create<AuthState>() ek function hai jo ek naya store setup karta hai. Uske baad jo function return hota hai, uspe hum persist lagate hain. Persist ka kaam hai Zustand ke state ko localStorage mein save aur restore karna. Matlab jab bhi state update hoga, persist usse storage mein save kar dega, aur refresh ke baad wahi state wapas la dega. ise bolte h higher order function bolte h (ek function ko return karta h or uss return function ko call karahe h)
