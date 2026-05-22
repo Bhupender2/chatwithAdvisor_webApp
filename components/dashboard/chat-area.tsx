@@ -57,7 +57,7 @@ export default function ChatArea() {
       <div className="flex gap-2">
         <input
           type="text"
-          placeholder="Ask me anything..."
+          placeholder="Type your message..."
           className="flex-1 px-4 py-2 rounded-lg border border-input bg-background text-foreground placeholder-muted-foreground focus:outline-none focus:ring-2 focus:ring-ring"
         />
         <button className="px-4 py-2 bg-green-700 text-primary-foreground rounded-lg hover:bg-green-800 transition-colors font-medium">
