@@ -12,15 +12,15 @@ import {
 } from "../ui/sidebar";
 import { Database, BookOpen, Users, BarChart3 } from "lucide-react";
 
-const chatGroups = [
-  { id: 1, name: "NEET PG", icon: Database },
-  { id: 2, name: "NEET PG OD", icon: BookOpen },
-  { id: 3, name: "NEET UG", icon: Users },
-  { id: 4, name: "NEET UG 0D", icon: BarChart3 },
-];
-
 export default function DashboardSidebar() {
   const { data: defaultGroups = [], isLoading } = useFetchGroups();
+
+  const iconMap: Record<string, React.ElementType> = {
+    "NEET PG": Database,
+    "NEET PG OD": BookOpen,
+    "NEET UG": Users,
+    "NEET UG OD": BarChart3, // Add more if needed
+  };
 
   console.log("default groups", defaultGroups);
   return (
@@ -29,10 +29,10 @@ export default function DashboardSidebar() {
         <SidebarGroup>
           {/* <SidebarGroupLabel className="text-lg">Chat Groups</SidebarGroupLabel> */}
           <SidebarMenu>
-            {chatGroups.map((group) => {
-              const IconComponent = group.icon;
+            {defaultGroups.map((group: any) => {
+              const IconComponent = iconMap[group.name] || BarChart3;
               return (
-                <SidebarMenuItem key={group.id} className="py-2">
+                <SidebarMenuItem key={group.conversationId} className="py-2">
                   <SidebarMenuButton>
                     <IconComponent className="w-4 h-4" />
                     <span>{group.name}</span>
