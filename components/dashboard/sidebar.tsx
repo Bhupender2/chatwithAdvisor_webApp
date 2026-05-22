@@ -12,9 +12,11 @@ import {
 } from "../ui/sidebar";
 import { Database, BookOpen, Users, BarChart3 } from "lucide-react";
 import { Skeleton } from "../ui/skeleton";
+import { useChatStore } from "@/store/chat-store";
 
 export default function DashboardSidebar() {
   const { data: defaultGroups = [], isLoading } = useFetchGroups();
+  const setConversationId = useChatStore((state) => state.setConversationId);
 
   const iconMap: Record<string, React.ElementType> = {
     "NEET PG": Database,
@@ -63,7 +65,13 @@ export default function DashboardSidebar() {
               {defaultGroups.map((group: any) => {
                 const IconComponent = iconMap[group.name] || BarChart3;
                 return (
-                  <SidebarMenuItem key={group.conversationId} className="py-2">
+                  <SidebarMenuItem
+                    key={group.conversationId}
+                    className="py-2"
+                    onClick={() => {
+                      setConversationId(group.conversationId);
+                    }}
+                  >
                     <SidebarMenuButton>
                       <IconComponent className="w-4 h-4" />
                       <span>{group.name}</span>
