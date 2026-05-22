@@ -20,7 +20,7 @@ export default function DashboardSidebar() {
     "NEET PG OD": BookOpen,
     "NEET UG": Users,
     "NEET UG OD": BarChart3, // Add more if needed
-  };
+  }; // Yani iconMap ek object hai jisme keys string hain aur values React components hain.
 
   console.log("default groups", defaultGroups);
   return (
