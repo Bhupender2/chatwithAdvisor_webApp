@@ -17,7 +17,7 @@ interface AuthState {
     appAccess?: string,
     pkg?: string,
   ) => void;
-  setNotificationToken: (notificationToken: string) => void;
+  // setNotificationToken: (notificationToken: string) => void;
   clearAuth: () => void;
 }
 
@@ -29,7 +29,7 @@ export const AuthStore = create<AuthState>()(
       name: null,
       role: null,
       appAccess: null,
-      notificationToken: null,
+      // notificationToken: null,
       pkg: null,
       setAuth: (token, senderId, name, role, appAccess, pkg) => {
         set((state) => ({
@@ -43,10 +43,10 @@ export const AuthStore = create<AuthState>()(
         }));
       },
 
-      setNotificationToken: (notificationToken) =>
-        set({
-          notificationToken,
-        }),
+      // setNotificationToken: (notificationToken) =>
+      //   set({
+      //     notificationToken,
+      //   }),
 
       clearAuth: () => {
         set({
