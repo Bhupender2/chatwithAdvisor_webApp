@@ -12,10 +12,10 @@ import {
 import { Database, BookOpen, Users, BarChart3 } from "lucide-react";
 
 const chatGroups = [
-  { id: 1, name: "PG", icon: Database },
-  { id: 2, name: "PG OD", icon: BookOpen },
-  { id: 3, name: "UG", icon: Users },
-  { id: 4, name: "UG 0D", icon: BarChart3 },
+  { id: 1, name: "NEET PG", icon: Database },
+  { id: 2, name: "NEET PG OD", icon: BookOpen },
+  { id: 3, name: "NEET UG", icon: Users },
+  { id: 4, name: "NEET UG 0D", icon: BarChart3 },
 ];
 
 export default function DashboardSidebar() {
