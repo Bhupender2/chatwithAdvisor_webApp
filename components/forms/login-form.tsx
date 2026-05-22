@@ -16,11 +16,14 @@ import { useState } from "react";
 import { toast } from "sonner";
 import { CheckCircle2, CircleAlert } from "lucide-react";
 import { useRouter } from "next/navigation";
+import { useAuthStore } from "@/store/auth-store";
 
 export function LoginForm({
   className,
   ...props
 }: React.ComponentProps<"div">) {
+  const setAuth = useAuthStore((set) => set.setAuth);
+
   const [employeeData, setEmployeeData] = useState({
     employeeId: "",
     password: "",
@@ -48,7 +51,16 @@ export function LoginForm({
         toast.success("Login Successfully", {
           icon: <CheckCircle2 className="text-green-600" />,
         });
+        setAuth(
+          data.token,
+          data.staff.chatUserId,
+          data.staff.name,
+          data.staff.role,
+          data.staff.appAccess,
+        );
+
         router.push("Dashboard");
+        console.log("bitches come and go", data);
       },
       onError: (error) => {
         console.error("Error login Failed");
