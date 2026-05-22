@@ -1,3 +1,4 @@
+import { PlusIcon, SendHorizonalIcon } from "lucide-react";
 import { Card } from "../ui/card";
 
 type ChatMessage = {
@@ -54,14 +55,15 @@ export default function ChatArea() {
       </div>
 
       {/* Input */}
-      <div className="flex gap-2">
+      <div className="flex gap-2 items-center">
+        <PlusIcon />
         <input
           type="text"
           placeholder="Type your message..."
-          className="flex-1 px-4 py-2 rounded-lg border border-input bg-background text-foreground placeholder-muted-foreground focus:outline-none focus:ring-2 focus:ring-ring"
+          className="flex-1 px-4 py-2 rounded-full border border-input bg-background text-foreground placeholder-muted-foreground focus:outline-none focus:ring-2 focus:ring-ring"
         />
-        <button className="px-4 py-2 bg-green-700 text-primary-foreground rounded-lg hover:bg-green-800 transition-colors font-medium">
-          Send
+        <button className="px-3 py-3 bg-green-700 text-primary-foreground rounded-full hover:bg-green-800 transition-colors font-medium">
+          <SendHorizonalIcon />
         </button>
       </div>
     </div>
