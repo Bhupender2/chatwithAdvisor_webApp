@@ -1,3 +1,6 @@
+"use client";
+
+import { useFetchGroups } from "@/hooks/queries/use-default-groups";
 import {
   Sidebar,
   SidebarContent,
@@ -17,6 +20,9 @@ const chatGroups = [
 ];
 
 export default function DashboardSidebar() {
+  const { data: defaultGroups = [], isLoading } = useFetchGroups();
+
+  console.log("default groups", defaultGroups);
   return (
     <Sidebar className="relative h-full" variant="floating" collapsible="icon">
       <SidebarContent>
