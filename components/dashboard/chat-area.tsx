@@ -69,3 +69,5 @@ export default function ChatArea() {
     </div>
   );
 }
+
+//the parent component:does NOT render its own DOM element passes/injects its behavior + styling into child
