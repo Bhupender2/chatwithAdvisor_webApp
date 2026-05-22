@@ -4,8 +4,13 @@ import { SidebarTrigger } from "@/components/ui/sidebar";
 import { Button } from "@/components/ui/button";
 import { LogOut } from "lucide-react";
 import Image from "next/image";
+import { useAuthStore } from "@/store/auth-store";
+import { useRouter } from "next/navigation";
+import { toast } from "sonner";
 
 export function AppHeader() {
+  const { clearAuth } = useAuthStore();
+  const router = useRouter();
   return (
     <header className="sticky top-0 z-40 w-full p-2">
       <div className="flex items-center justify-between px-4 rounded-lg border border-gray-700/30  backdrop-blur  w-full py-2">
@@ -24,7 +29,14 @@ export function AppHeader() {
             size="lg"
             className="flex items-center gap-2 "
           >
-            <LogOut className="w-4 h-4 text-indigo-900" />
+            <LogOut
+              className="w-4 h-4 text-indigo-900"
+              onClick={() => {
+                clearAuth();
+                router.push("/login");
+                toast.error("Logout SuccessFully");
+              }}
+            />
             <span className="font-semibold">Logout</span>
           </Button>
         </div>
