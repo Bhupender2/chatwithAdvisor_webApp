@@ -33,7 +33,7 @@ export default function VideoMessage({
             {new Date(timestamp).toLocaleTimeString()}
           </span>
         </div>
-        <Card className="border-none rounded-lg overflow-hidden max-w-sm bg-[#d6f3cf]">
+        <Card className="border-none rounded-lg overflow-hidden max-w-sm bg-[#d6f3cf] gap-0">
           <div className="relative w-full h-60 flex items-center justify-center group cursor-pointer">
             <video
               src={videoUrl}
@@ -46,7 +46,7 @@ export default function VideoMessage({
             </div> */}
           </div>
           {content && (
-            <div className="p-2">
+            <div className="p-1">
               <p className="text-sm text-gray-800">{content}</p>
             </div>
           )}

@@ -33,8 +33,8 @@ export default function ImageMessage({
             {new Date(timestamp).toLocaleTimeString()}
           </span>
         </div>
-        <Card className="border-none rounded-lg overflow-hidden max-w-sm bg-[#d6f3cf] p-1">
-          <div className="relative w-full h-60 rounded-lg">
+        <Card className="border-none rounded-lg overflow-hidden max-w-sm bg-[#d6f3cf] p-1 gap-0">
+          <div className="relative w-full min-h-120 rounded-lg">
             <Image
               src={imageUrl}
               alt="Message image"
