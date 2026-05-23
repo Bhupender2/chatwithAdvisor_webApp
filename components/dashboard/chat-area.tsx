@@ -5,6 +5,43 @@ import { Card } from "../ui/card";
 import { AddDropDownMenu } from "./add-dropdown-menu";
 import { useChatStore } from "@/store/chat-store";
 import { usePreviousChats } from "@/hooks/queries/use-previous-chats";
+import TextMessage from "./messages/message-text";
+import ImageMessage from "./messages/message-image";
+import VideoMessage from "./messages/message-video";
+import PDFMessage from "./messages/message-pdf";
+import AudioMessage from "./messages/message-audio";
+
+interface Message {
+  _id: string;
+  senderId: {
+    _id: string;
+    name: string;
+    profile: string;
+  };
+  text: string;
+  type: "text" | "audio" | "video" | "pdf" | "image";
+  content: string;
+  createdAt: string;
+}
+
+function renderMessage(message: Message) {
+  const { senderId, text, type, content, createdAt } = message;
+  const senderName = senderId.name;
+  switch (type) {
+    case "text":
+      return <TextMessage />;
+    case "image":
+      return <ImageMessage />;
+    case "video":
+      return <VideoMessage />;
+    case "pdf":
+      return <PDFMessage />;
+    case "audio":
+      return <AudioMessage />;
+    default:
+      return null;
+  }
+}
 
 export default function ChatArea() {
   const conversationId = useChatStore((state) => state.conversationId);
@@ -17,16 +54,8 @@ export default function ChatArea() {
     <div className="flex flex-col gap-4 p-4 h-full">
       {/* Messages */}
       <div className="flex-1 overflow-y-auto space-y-4">
-        {previousChats?.messages?.map(
-          (message: { id: string; content: string }) => (
-            <div key={message.id} className="flex justify-end">
-              <Card
-                className={`max-w-md px-4 py-3 rounded-lg bg-[#d6f3cf] text-primary-foreground`}
-              >
-                <p className="text-sm text-gray-600">{message.content}</p>
-              </Card>
-            </div>
-          ),
+        {previousChats?.messages?.map((message: Message) =>
+          renderMessage(message),
         )}
       </div>
 
