@@ -10,7 +10,8 @@ import ImageMessage from "./messages/message-image";
 import VideoMessage from "./messages/message-video";
 import PDFMessage from "./messages/message-pdf";
 import AudioMessage from "./messages/message-audio";
-import { Skeleton } from "../ui/skeleton";
+import { ChatSkeletonLoader } from "./chat-skeleton-loader";
+import { ChatEmptyState } from "./chat-empty-state";
 
 interface Message {
   _id: string;
@@ -94,20 +95,7 @@ export default function ChatArea() {
   return (
     <div className="flex flex-col gap-4 p-4 h-full">
       {isLoading ? (
-        <div className="flex-1 space-y-4">
-          <div className="justify-end">
-            <Skeleton className="bg-gray-200 h-10" />
-          </div>
-          <div className="justify-start">
-            <Skeleton className="bg-gray-200 h-10" />
-          </div>
-          <div className="justify-end">
-            <Skeleton className="bg-gray-200 h-10" />
-          </div>
-          <div className="justify-start">
-            <Skeleton className="bg-gray-200 h-10" />
-          </div>
-        </div>
+        <ChatSkeletonLoader />
       ) : previousChats?.message?.length > 0 ? (
         <div className="flex-1 overflow-y-auto space-y-4">
           {previousChats?.messages?.map((message: Message) =>
@@ -115,9 +103,7 @@ export default function ChatArea() {
           )}
         </div>
       ) : (
-        <div className="flex flex-1">
-          <div className="justify-center items-center">no message found</div>
-        </div>
+        <ChatEmptyState />
       )}
 
       {/* Input */}
