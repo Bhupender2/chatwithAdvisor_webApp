@@ -37,7 +37,7 @@ export default function PDFMessage({
           <div className="flex items-center gap-3">
             {/* PDF Icon */}
             <div className="w-12 h-12 rounded bg-green-100 flex items-center justify-center shrink-0">
-              <FileText className="w-6 h-6 text-green-900" />
+              <FileText className="w-6 h-6 text-gray-600" />
             </div>
 
             {/* PDF Info */}
