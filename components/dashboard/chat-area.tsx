@@ -6,36 +6,6 @@ import { AddDropDownMenu } from "./add-dropdown-menu";
 import { useChatStore } from "@/store/chat-store";
 import { usePreviousChats } from "@/hooks/queries/use-previous-chats";
 
-type ChatMessage = {
-  id: string;
-  role: "user" | "assistant";
-  content: string;
-};
-const sampleMessages: ChatMessage[] = [
-  {
-    id: "1",
-    role: "user",
-    content: "How do I use the sidebar component?",
-  },
-  {
-    id: "2",
-    role: "assistant",
-    content:
-      "The sidebar component is a flexible navigation container. You can use SidebarProvider to wrap your app, then add Sidebar with SidebarContent, Header, and Footer sections. Use SidebarMenu for navigation items.",
-  },
-  {
-    id: "3",
-    role: "user",
-    content: "Can I customize the colors?",
-  },
-  {
-    id: "4",
-    role: "assistant",
-    content:
-      "Yes! You can customize colors using CSS variables and Tailwind classes. The sidebar uses theme tokens like bg-sidebar, text-sidebar-foreground, etc.",
-  },
-];
-
 export default function ChatArea() {
   const conversationId = useChatStore((state) => state.conversationId);
 
