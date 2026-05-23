@@ -34,10 +34,10 @@ export default function VideoMessage({
           </span>
         </div>
         <Card className="border-none rounded-lg overflow-hidden max-w-sm bg-[#d6f3cf]">
-          <div className="relative w-full h-48 flex items-center justify-center group cursor-pointer">
+          <div className="relative w-full h-60 flex items-center justify-center group cursor-pointer">
             <video
               src={videoUrl}
-              className="w-full h-full"
+              className="w-full h-full object-cover"
               controls
               controlsList="nodownload"
             />

@@ -39,7 +39,7 @@ export default function ImageMessage({
               src={imageUrl}
               alt="Message image"
               fill
-              className="object-contain"
+              className="object-cover"
               onError={(e) => {
                 const target = e.target as HTMLImageElement;
                 target.style.display = "none";
