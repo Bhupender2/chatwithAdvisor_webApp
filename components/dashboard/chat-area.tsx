@@ -10,6 +10,7 @@ import ImageMessage from "./messages/message-image";
 import VideoMessage from "./messages/message-video";
 import PDFMessage from "./messages/message-pdf";
 import AudioMessage from "./messages/message-audio";
+import { Skeleton } from "../ui/skeleton";
 
 interface Message {
   _id: string;
@@ -86,18 +87,38 @@ function renderMessage(message: Message) {
 export default function ChatArea() {
   const conversationId = useChatStore((state) => state.conversationId);
 
-  const { data: previousChats = [] } = usePreviousChats();
+  const { data: previousChats = [], isLoading } = usePreviousChats();
 
   console.log("converationId", conversationId);
   console.log("prev chats based on conversationId", previousChats.messages);
   return (
     <div className="flex flex-col gap-4 p-4 h-full">
-      {/* Messages */}
-      <div className="flex-1 overflow-y-auto space-y-4">
-        {previousChats?.messages?.map((message: Message) =>
-          renderMessage(message),
-        )}
-      </div>
+      {isLoading ? (
+        <div className="flex-1 space-y-4">
+          <div className="justify-end">
+            <Skeleton className="bg-gray-200 h-10" />
+          </div>
+          <div className="justify-start">
+            <Skeleton className="bg-gray-200 h-10" />
+          </div>
+          <div className="justify-end">
+            <Skeleton className="bg-gray-200 h-10" />
+          </div>
+          <div className="justify-start">
+            <Skeleton className="bg-gray-200 h-10" />
+          </div>
+        </div>
+      ) : previousChats?.message?.length > 0 ? (
+        <div className="flex-1 overflow-y-auto space-y-4">
+          {previousChats?.messages?.map((message: Message) =>
+            renderMessage(message),
+          )}
+        </div>
+      ) : (
+        <div className="flex flex-1">
+          <div className="justify-center items-center">no message found</div>
+        </div>
+      )}
 
       {/* Input */}
       <div className="flex gap-2 items-center">
