@@ -49,6 +49,7 @@ export default function PDFMessage({
             {/* Download Button */}
             <a
               href={pdfUrl}
+              target="_blank"
               download
               className="shrink-0 w-8 h-8 rounded bg-green-800 hover:bg-green-900 flex items-center justify-center transition-colors"
             >
