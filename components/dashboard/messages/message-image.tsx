@@ -34,7 +34,7 @@ export default function ImageMessage({
           </span>
         </div>
         <Card className="border-none rounded-lg overflow-hidden max-w-sm">
-          <div className="relative w-full h-48 bg-gray-200">
+          <div className="relative w-full h-60 bg-gray-200">
             <Image
               src={imageUrl}
               alt="Message image"
@@ -46,6 +46,11 @@ export default function ImageMessage({
               }}
             />
           </div>
+          {content && (
+            <div className="p-2 bg-gray-100">
+              <p className="text-xs text-gray-800">{content}</p>
+            </div>
+          )}
         </Card>
       </div>
     </div>
