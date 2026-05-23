@@ -4,6 +4,7 @@ import { persist } from "zustand/middleware";
 interface ConversationState {
   conversationId: string | null;
   setConversationId: (conversationId: string) => void;
+  clearChat: () => void;
 }
 
 export const useChatStore = create<ConversationState>()(
@@ -14,6 +15,11 @@ export const useChatStore = create<ConversationState>()(
         set({
           conversationId: conversationId,
         }),
+      clearChat: () => {
+        set({
+          conversationId: null, // conversation id is being null
+        });
+      },
     }),
     {
       name: "chat-storage",
