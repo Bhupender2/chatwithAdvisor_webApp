@@ -37,7 +37,7 @@ export default function PDFMessage({
             {new Date(timestamp).toLocaleTimeString()}
           </span>
         </div>
-        <Card className="rounded-lg p-3 max-w-sm hover:shadow-md transition-shadow">
+        <Card className="rounded-lg   p-3 max-w-sm hover:shadow-md transition-shadow">
           <div className="flex items-center gap-3">
             {/* PDF Icon */}
             <div className="w-12 h-12 rounded bg-green-100 flex items-center justify-center shrink-0">
