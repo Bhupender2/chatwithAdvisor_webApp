@@ -96,7 +96,7 @@ export default function ChatArea() {
     <div className="flex flex-col gap-4 p-4 h-full">
       {isLoading ? (
         <ChatSkeletonLoader />
-      ) : previousChats?.message?.length > 0 ? (
+      ) : previousChats?.messages?.length > 0 ? (
         <div className="flex-1 overflow-y-auto space-y-4">
           {previousChats?.messages?.map((message: Message) =>
             renderMessage(message),
