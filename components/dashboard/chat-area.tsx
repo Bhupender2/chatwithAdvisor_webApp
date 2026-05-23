@@ -17,15 +17,17 @@ export default function ChatArea() {
     <div className="flex flex-col gap-4 p-4 h-full">
       {/* Messages */}
       <div className="flex-1 overflow-y-auto space-y-4">
-        {previousChats?.messages?.map((message) => (
-          <div key={message.id} className="flex justify-end">
-            <Card
-              className={`max-w-md px-4 py-3 rounded-lg bg-[#d6f3cf] text-primary-foreground`}
-            >
-              <p className="text-sm text-gray-600">{message.content}</p>
-            </Card>
-          </div>
-        ))}
+        {previousChats?.messages?.map(
+          (message: { id: string; content: string }) => (
+            <div key={message.id} className="flex justify-end">
+              <Card
+                className={`max-w-md px-4 py-3 rounded-lg bg-[#d6f3cf] text-primary-foreground`}
+              >
+                <p className="text-sm text-gray-600">{message.content}</p>
+              </Card>
+            </div>
+          ),
+        )}
       </div>
 
       {/* Input */}
