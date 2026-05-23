@@ -37,7 +37,7 @@ export default function VideoMessage({
           <div className="relative w-full h-60 flex items-center justify-center group cursor-pointer">
             <video
               src={videoUrl}
-              className="w-full h-full object-cover"
+              className="w-full h-full object-cover rounded-lg"
               controls
               controlsList="nodownload"
             />
