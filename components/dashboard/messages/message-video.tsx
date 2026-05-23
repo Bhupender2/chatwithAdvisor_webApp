@@ -33,20 +33,20 @@ export default function VideoMessage({
             {new Date(timestamp).toLocaleTimeString()}
           </span>
         </div>
-        <Card className="border-none rounded-lg overflow-hidden max-w-sm bg-black">
-          <div className="relative w-full h-48 bg-black flex items-center justify-center group cursor-pointer">
+        <Card className="border-none rounded-lg overflow-hidden max-w-sm bg-[#d6f3cf]">
+          <div className="relative w-full h-48 flex items-center justify-center group cursor-pointer">
             <video
               src={videoUrl}
-              className="w-full h-full object-cover"
+              className="w-full h-full"
               controls
               controlsList="nodownload"
             />
-            <div className="absolute inset-0 bg-black/30 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
+            {/* <div className="absolute inset-0 bg-black/30 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
               <Play className="w-12 h-12 text-white" />
-            </div>
+            </div> */}
           </div>
           {content && (
-            <div className="p-2 bg-gray-100">
+            <div className="p-2">
               <p className="text-sm text-gray-800">{content}</p>
             </div>
           )}
