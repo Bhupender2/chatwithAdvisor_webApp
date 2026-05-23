@@ -33,11 +33,11 @@ export default function PDFMessage({
             {new Date(timestamp).toLocaleTimeString()}
           </span>
         </div>
-        <Card className="border border-green-200 rounded-lg bg-green-50 p-3 max-w-sm hover:shadow-md transition-shadow">
+        <Card className="rounded-lg   p-3 max-w-sm hover:shadow-md transition-shadow">
           <div className="flex items-center gap-3">
             {/* PDF Icon */}
             <div className="w-12 h-12 rounded bg-green-100 flex items-center justify-center shrink-0">
-              <FileText className="w-6 h-6 text-green-600" />
+              <FileText className="w-6 h-6 text-green-900" />
             </div>
 
             {/* PDF Info */}
@@ -50,7 +50,7 @@ export default function PDFMessage({
             <a
               href={pdfUrl}
               download
-              className="shrink-0 w-8 h-8 rounded bg-green-600 hover:bg-green-700 flex items-center justify-center transition-colors"
+              className="shrink-0 w-8 h-8 rounded bg-green-800 hover:bg-green-900 flex items-center justify-center transition-colors"
             >
               <Download className="w-4 h-4 text-white" />
             </a>

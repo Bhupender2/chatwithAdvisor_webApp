@@ -30,8 +30,8 @@ export default function TextMessage({
             {new Date(timestamp).toLocaleTimeString()}
           </span>
         </div>
-        <Card className="bg-green-100 border-none rounded-lg p-3 max-w-md">
-          <p className="text-sm text-gray-800">{content}</p>
+        <Card className="bg-[#d6f3cf] border-none rounded-lg p-3 max-w-md">
+          <p className="text-sm text-gray-700">{content}</p>
         </Card>
       </div>
     </div>

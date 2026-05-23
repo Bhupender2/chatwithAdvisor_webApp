@@ -33,9 +33,9 @@ export default function AudioMessage({
             {new Date(timestamp).toLocaleTimeString()}
           </span>
         </div>
-        <Card className="border-none rounded-lg bg-linear-to-r from-green-500 to-green-600 p-3 max-w-sm">
+        <Card className="border-none rounded-lg   p-3 max-w-sm">
           <div className="flex items-center gap-3">
-            <div className="w-10 h-10 rounded-full bg-white/20 flex items-center justify-center shrink-0">
+            <div className="w-10 h-10 rounded-full bg-gray-500 flex items-center justify-center shrink-0">
               <Music className="w-5 h-5 text-white" />
             </div>
             <audio
@@ -43,9 +43,6 @@ export default function AudioMessage({
               controls
               controlsList="nodownload"
               className="flex-1 h-8"
-              style={{
-                filter: "invert(1) hue-rotate(180deg)",
-              }}
             />
           </div>
         </Card>

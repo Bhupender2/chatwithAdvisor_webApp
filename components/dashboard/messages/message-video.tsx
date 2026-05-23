@@ -17,7 +17,7 @@ export default function VideoMessage({
   return (
     <div className="flex gap-3 mb-4">
       {/* Avatar */}
-      <div className="w-10 h-10 rounded-full bg-green-600 flex items-center justify-center shrink-0">
+      <div className="w-10 h-10 rounded-full bg-green-800 flex items-center justify-center shrink-0">
         <span className="text-white font-bold text-sm">
           {senderName.charAt(0)}
         </span>
