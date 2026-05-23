@@ -18,7 +18,6 @@ export default function QueryProvider({
     return new QueryClient({
       defaultOptions: {
         queries: {
-          staleTime: 1000 * 60, // 1 min tak fresh data maan lo
           refetchOnWindowFocus: false, // tab switch karne pe ya window pe wapas aane pe phirse fetch mat karna data (dont call API)
         },
       },
