@@ -29,15 +29,50 @@ function renderMessage(message: Message) {
   const senderName = senderId.name;
   switch (type) {
     case "text":
-      return <TextMessage />;
+      return (
+        <TextMessage
+          senderName={senderName}
+          content={content}
+          text={text}
+          timestamp={createdAt}
+        />
+      );
     case "image":
-      return <ImageMessage />;
+      return (
+        <ImageMessage
+          senderName={senderName}
+          content={content}
+          text={text}
+          timestamp={createdAt}
+        />
+      );
     case "video":
-      return <VideoMessage />;
+      return (
+        <VideoMessage
+          senderName={senderName}
+          content={content}
+          text={text}
+          timestamp={createdAt}
+        />
+      );
     case "pdf":
-      return <PDFMessage />;
+      return (
+        <PDFMessage
+          senderName={senderName}
+          content={content}
+          text={text}
+          timestamp={createdAt}
+        />
+      );
     case "audio":
-      return <AudioMessage />;
+      return (
+        <AudioMessage
+          senderName={senderName}
+          content={content}
+          text={text}
+          timestamp={createdAt}
+        />
+      );
     default:
       return null;
   }
