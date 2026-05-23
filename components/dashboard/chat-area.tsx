@@ -25,12 +25,13 @@ interface Message {
 }
 
 function renderMessage(message: Message) {
-  const { senderId, text, type, content, createdAt } = message;
+  const { senderId, text, type, content, createdAt, _id } = message;
   const senderName = senderId.name;
   switch (type) {
     case "text":
       return (
         <TextMessage
+          key={_id}
           senderName={senderName}
           content={content}
           text={text}
@@ -40,6 +41,7 @@ function renderMessage(message: Message) {
     case "image":
       return (
         <ImageMessage
+          key={_id}
           senderName={senderName}
           content={content}
           text={text}
@@ -49,6 +51,7 @@ function renderMessage(message: Message) {
     case "video":
       return (
         <VideoMessage
+          key={_id}
           senderName={senderName}
           content={content}
           text={text}
@@ -58,6 +61,7 @@ function renderMessage(message: Message) {
     case "pdf":
       return (
         <PDFMessage
+          key={_id}
           senderName={senderName}
           content={content}
           text={text}
@@ -67,6 +71,7 @@ function renderMessage(message: Message) {
     case "audio":
       return (
         <AudioMessage
+          key={_id}
           senderName={senderName}
           content={content}
           text={text}
