@@ -42,12 +42,12 @@ export default function ChatArea() {
   const { data: previousChats = [] } = usePreviousChats();
 
   console.log("converationId", conversationId);
-  console.log("prev chats based on conversationId", previousChats);
+  console.log("prev chats based on conversationId", previousChats.messages);
   return (
     <div className="flex flex-col gap-4 p-4 h-full">
       {/* Messages */}
       <div className="flex-1 overflow-y-auto space-y-4">
-        {sampleMessages.map((message) => (
+        {previousChats?.messages?.map((message) => (
           <div key={message.id} className="flex justify-end">
             <Card
               className={`max-w-md px-4 py-3 rounded-lg bg-[#d6f3cf] text-primary-foreground`}
