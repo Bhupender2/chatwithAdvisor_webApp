@@ -7,9 +7,11 @@ import Image from "next/image";
 import { useAuthStore } from "@/store/auth-store";
 import { useRouter } from "next/navigation";
 import { toast } from "sonner";
+import { useChatStore } from "@/store/chat-store";
 
 export function AppHeader() {
   const { clearAuth } = useAuthStore();
+  const { clearChat } = useChatStore();
   const router = useRouter();
   return (
     <header className="sticky top-0 z-40 w-full p-2">
@@ -29,7 +31,8 @@ export function AppHeader() {
             size="lg"
             className="flex items-center gap-2"
             onClick={() => {
-              clearAuth();
+              clearAuth(); // clearing the appAccess role everything
+              clearChat(); // clearing the conversation id here
               router.push("/login");
               toast.success("Logged out successfully", {
                 icon: <CheckCircle2 className="text-indigo-900" />,
