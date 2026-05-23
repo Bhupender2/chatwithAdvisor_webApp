@@ -10,6 +10,9 @@ export const fetchPreviousChats = async () => {
     headers: {
       Authorization: `Bearer ${token}`,
     },
+    params: {
+      conversationId: conversationId,
+    },
   });
   return response.data;
 };
