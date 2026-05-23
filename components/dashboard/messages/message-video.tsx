@@ -47,7 +47,7 @@ export default function VideoMessage({
           </div>
           {content && (
             <div className="p-2 bg-gray-100">
-              <p className="text-xs text-gray-800">{content}</p>
+              <p className="text-sm text-gray-800">{content}</p>
             </div>
           )}
         </Card>

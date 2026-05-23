@@ -33,13 +33,13 @@ export default function ImageMessage({
             {new Date(timestamp).toLocaleTimeString()}
           </span>
         </div>
-        <Card className="border-none rounded-lg overflow-hidden max-w-sm">
-          <div className="relative w-full h-60 bg-gray-200">
+        <Card className="border-none rounded-lg overflow-hidden max-w-sm bg-[#d6f3cf] p-1">
+          <div className="relative w-full h-60 rounded-lg">
             <Image
               src={imageUrl}
               alt="Message image"
               fill
-              className="object-cover"
+              className="object-contain"
               onError={(e) => {
                 const target = e.target as HTMLImageElement;
                 target.style.display = "none";
@@ -47,8 +47,8 @@ export default function ImageMessage({
             />
           </div>
           {content && (
-            <div className="p-2 bg-gray-100">
-              <p className="text-xs text-gray-800">{content}</p>
+            <div className="p-1">
+              <p className="text-sm text-gray-800">{content}</p>
             </div>
           )}
         </Card>
