@@ -48,16 +48,9 @@ export default function ChatArea() {
       {/* Messages */}
       <div className="flex-1 overflow-y-auto space-y-4">
         {sampleMessages.map((message) => (
-          <div
-            key={message.id}
-            className={`flex ${message.role === "user" ? "justify-end" : "justify-start"}`}
-          >
+          <div key={message.id} className="flex justify-end">
             <Card
-              className={`max-w-md px-4 py-3 rounded-lg ${
-                message.role === "user"
-                  ? "bg-[#d6f3cf] text-primary-foreground"
-                  : "bg-muted text-foreground"
-              }`}
+              className={`max-w-md px-4 py-3 rounded-lg bg-[#d6f3cf] text-primary-foreground`}
             >
               <p className="text-sm text-gray-600">{message.content}</p>
             </Card>
