@@ -17,9 +17,13 @@ export default function ImageMessage({
   return (
     <div className="flex gap-3 mb-4">
       {/* Avatar */}
-      <div className="w-10 h-10 rounded-full bg-green-800 flex items-center justify-center hrink-0">
+      <div className="w-11 h-11 rounded-full bg-green-800 flex items-center justify-center hrink-0">
         <span className="text-white font-bold text-sm">
-          {senderName.charAt(0)}
+          {senderName
+            .split(" ")
+            .map((word) => word.charAt(0))
+            .join("")
+            .toUpperCase()}
         </span>
       </div>
 
