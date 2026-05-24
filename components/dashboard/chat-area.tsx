@@ -1,6 +1,6 @@
 "use client";
 
-import { PlusIcon, SendHorizonalIcon } from "lucide-react";
+import { Loader2, PlusIcon, SendHorizonalIcon } from "lucide-react";
 import { Card } from "../ui/card";
 import { AddDropDownMenu } from "./add-dropdown-menu";
 import { useChatStore } from "@/store/chat-store";
@@ -98,8 +98,14 @@ export default function ChatArea() {
         <ChatSkeletonLoader />
       ) : previousChats?.messages?.length > 0 ? (
         <div className="flex-1 overflow-y-auto space-y-4 ">
-          <div className="w-fit  drop-shadow-2xl px-6 py-2 rounded-md text-xs mx-auto bg-white cursor-pointer text-gray-700 hover:scale-110 transition-all duration-300 ease-in-out">
+          {/* <div className="w-fit drop-shadow-2xl px-6 py-2 rounded-md text-xs mx-auto bg-white cursor-pointer text-gray-700 hover:scale-110 transition-all duration-300 ease-in-out">
             click to get more messages
+          </div> */}
+          <div className="p-2 bg-white w-fit rounded-full mx-auto drop-shadow-2xl">
+            <Loader2
+              className="animate-spin text-green-600 w-7 h-7"
+              strokeWidth={2.3}
+            />
           </div>
 
           {previousChats?.messages?.map((message: Message) =>
