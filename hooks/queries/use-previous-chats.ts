@@ -13,7 +13,7 @@ export const usePreviousChats = () => {
       if (!lastPage.hasMore) {
         return undefined;
       }
-      return lastPage.nextCursor;
+      return lastPage.nextCursor; // next page cursor (_id) to pass
     },
   });
 };
