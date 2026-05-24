@@ -93,11 +93,15 @@ export default function ChatArea() {
   console.log("converationId", conversationId);
   console.log("prev chats based on conversationId", previousChats.messages);
   return (
-    <div className="flex flex-col gap-4 p-4 h-full">
+    <div className="flex flex-col gap-4 p-4 h-full bg-gray-100/80 rounded-lg">
       {isLoading ? (
         <ChatSkeletonLoader />
       ) : previousChats?.messages?.length > 0 ? (
-        <div className="flex-1 overflow-y-auto space-y-4">
+        <div className="flex-1 overflow-y-auto space-y-4 ">
+          <div className="w-fit  drop-shadow-2xl px-6 py-2 rounded-md text-xs mx-auto bg-white cursor-pointer text-gray-700 hover:scale-110 transition-all duration-300 ease-in-out">
+            click to get more messages
+          </div>
+
           {previousChats?.messages?.map((message: Message) =>
             renderMessage(message),
           )}

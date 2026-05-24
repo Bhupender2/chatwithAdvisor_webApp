@@ -27,7 +27,11 @@ export default function DashboardSidebar() {
 
   console.log("default groups", defaultGroups);
   return (
-    <Sidebar className="relative h-full" variant="floating" collapsible="icon">
+    <Sidebar
+      className="relative h-full pt-0.5"
+      variant="floating"
+      collapsible="icon"
+    >
       <SidebarContent>
         <SidebarGroup>
           {/* <SidebarGroupLabel className="text-lg">Chat Groups</SidebarGroupLabel> */}
