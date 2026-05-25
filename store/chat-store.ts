@@ -31,8 +31,21 @@ export const useChatStore = create<ConversationState>()(
       setConversationId: (conversationId) =>
         set({
           conversationId: conversationId,
-          // liveMessages;[] //  naya conversationId open hote hi clear kardo
+          liveMessages: [], //  naya conversationId open hote hi clear kardo
         }),
+
+      addMessage: (message: Message) => {
+        set((state) => {
+          // duplicate check
+          const exists = state.liveMessages.some(
+            (msg) => msg._id === message._id,
+          );
+          if (exists) return state;
+          return {
+            liveMessages: [...state.liveMessages, message], // add that message here .
+          };
+        });
+      },
       clearChat: () => {
         set({
           conversationId: null, // conversation id is being null
