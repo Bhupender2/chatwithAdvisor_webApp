@@ -51,6 +51,7 @@ function renderMessage(message: Message) {
           content={content}
           text={text}
           timestamp={createdAt}
+          status={(message as any).status}
         />
       );
     case "image":

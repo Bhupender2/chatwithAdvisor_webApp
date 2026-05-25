@@ -1,15 +1,18 @@
 import { Card } from "@/components/ui/card";
+import { Check, Clock, X } from "lucide-react";
 
 export default function TextMessage({
   senderName,
   content,
   text,
   timestamp,
+  status,
 }: {
   senderName: string;
   content: string;
   text: string;
   timestamp: string;
+  status?: "sending" | "sent" | "failed"; // ← add karo
 }) {
   return (
     <div className="flex gap-3 mb-4">
@@ -34,8 +37,16 @@ export default function TextMessage({
             {new Date(timestamp).toLocaleTimeString()}
           </span>
         </div>
-        <Card className="bg-[#d6f3cf] border-none rounded-lg p-3 max-w-md">
-          <p className="text-sm text-gray-700">{content}</p>
+        <Card className="bg-[#d6f3cf] border-none rounded-lg p-3 max-w-md flex flex-row space-x-2">
+          <p className="text-sm text-gray-700 flex-1">{content}</p>
+          {/* Status icons */}
+          <div className="flex justify-end mt-1">
+            {status === "sending" && (
+              <Clock className="w-3 h-3 text-gray-400" />
+            )}
+            {status === "sent" && <Check className="w-3 h-3 text-gray-500" />}
+            {status === "failed" && <X className="w-3 h-3 text-red-500" />}
+          </div>
         </Card>
       </div>
     </div>
