@@ -70,6 +70,10 @@ export const useChatStore = create<ConversationState>()(
     }),
     {
       name: "chat-storage",
+      partialize: (state) => ({
+        conversationId: state.conversationId, // ← sirf conversationId save karo
+        // liveMessages save MAT karo ❌
+      }),
     },
   ),
 );
