@@ -112,6 +112,59 @@ export default function ChatArea() {
   const name = useAuthStore((state) => state.name);
   const role = useAuthStore((state) => state.role);
 
+  // useeffect is addded here
+
+  useEffect(() => {
+    if (!token || !conversationId) return;
+
+    const socket = getSocket(token);
+
+    //room join karo
+    socket.emit("conversation:join", {
+      conversationId,
+    });
+
+    // new messages
+
+    socket.on("conversation:new", (data) => {
+      // apna message
+
+      if (data.senderId === senderId) {
+        if (data.type === "text") {
+          const tempMessage = useChatStore
+            .getState()
+            .liveMessages.find(
+              (msg) => msg.content === data.content && msg.status === "sending",
+            );
+
+          if (tempMessage) {
+            updateMessageStatus(tempMessage._id, data._id, "sent");
+          }
+        }
+        return;
+      }
+
+      // doosre ka message
+      addMessage({
+        _id: data._id,
+        type: data.type,
+        content: data.content,
+        conversationId: data.conversationId,
+        createdAt: data.createdAt,
+        status: "sent",
+        senderId: data.senderId, // string aayega → renderMessage handle karega
+        text: data.text,
+      });
+    });
+
+    return () => {
+      socket.emit("conversation:leave", {
+        conversationId,
+      });
+      socket.off("conversation:new");
+    };
+  }, [conversationId]);
+
   const {
     data: previousChats,
     isLoading,
