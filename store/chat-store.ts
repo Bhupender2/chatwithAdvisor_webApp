@@ -20,6 +20,13 @@ interface ConversationState {
   conversationId: string | null;
   liveMessages: Message[];
   setConversationId: (conversationId: string) => void;
+  addMessage: (message: Message) => void;
+  updateMessageStatus: (
+    tempId: string,
+    realId: string,
+    status: "sending" | "sent" | "failed",
+  ) => void;
+  clearMessages: () => void;
   clearChat: () => void;
 }
 
@@ -46,6 +53,14 @@ export const useChatStore = create<ConversationState>()(
           };
         });
       },
+      updateMessageStatus: (tempId, realId, status) => {
+        set((state) => ({
+          liveMessages: state.liveMessages.map((msg) =>
+            msg._id === tempId ? { ...msg, _id: realId, status } : msg,
+          ),
+        }));
+      },
+      clearMessages: () => set({ liveMessages: [] }),
       clearChat: () => {
         set({
           conversationId: null, // conversation id is being null
