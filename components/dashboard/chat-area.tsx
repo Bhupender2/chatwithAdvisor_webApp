@@ -88,7 +88,7 @@ export default function ChatArea() {
   const conversationId = useChatStore((state) => state.conversationId);
 
   const {
-    data: previousChats = [],
+    data: previousChats,
     isLoading,
     isFetchingNextPage,
     fetchNextPage,
