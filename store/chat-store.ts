@@ -42,7 +42,7 @@ export const useChatStore = create<ConversationState>()(
           );
           if (exists) return state;
           return {
-            liveMessages: [...state.liveMessages, message], // add that message here .
+            liveMessages: [...state.liveMessages, message], // add that message here ..
           };
         });
       },
