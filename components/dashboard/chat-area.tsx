@@ -11,6 +11,9 @@ import PDFMessage from "./messages/message-pdf";
 import AudioMessage from "./messages/message-audio";
 import { ChatSkeletonLoader } from "./chat-skeleton-loader";
 import { ChatEmptyState } from "./chat-empty-state";
+import { useState, useEffect } from "react";
+import { useAuthStore } from "@/store/auth-store";
+import { getSocket } from "@/services/socket-service";
 
 interface Message {
   _id: string;
@@ -86,6 +89,17 @@ function renderMessage(message: Message) {
 
 export default function ChatArea() {
   const conversationId = useChatStore((state) => state.conversationId);
+  const [inputText, setInputText] = useState("");
+
+  const addMessage = useChatStore((state) => state.addMessage);
+  const updateMessageStatus = useChatStore(
+    (state) => state.updateMessageStatus,
+  );
+  const liveMessage = useChatStore((state) => state.liveMessages);
+  const token = useAuthStore((state) => state.token);
+  const senderId = useAuthStore((state) => state.senderId);
+  const name = useAuthStore((state) => state.name);
+  const role = useAuthStore((state) => state.role);
 
   const {
     data: previousChats,
@@ -103,6 +117,38 @@ export default function ChatArea() {
       ?.slice()
       ?.reverse()
       .flatMap((page) => page.messages) || [];
+
+  const handleSendText = () => {
+    if (!inputText.trim()) return;
+    if (!token) return;
+
+    const tempId = `temp_${Date.now()}`;
+
+    // Step 1 — turant UI mein add karo
+    addMessage({
+      _id: tempId,
+      type: "text",
+      content: inputText,
+      conversationId: conversationId!,
+      createdAt: new Date().toISOString(),
+      status: "sending",
+      senderId: {
+        _id: senderId!,
+        name: name!,
+        profile: role!,
+      },
+    });
+
+    setInputText(""); // input clear karo
+
+    // step 2 get socket
+    const socket = getSocket(token);
+    socket.emit("conversation:send", {
+      type: "text",
+      content: inputText,
+      conversationId: conversationId,
+    });
+  };
   return (
     <div className="flex flex-col gap-4 p-4 h-full bg-gray-100/80 rounded-lg">
       {isLoading ? (
@@ -142,11 +188,14 @@ export default function ChatArea() {
         <AddDropDownMenu />
         <input
           type="text"
+          value={inputText}
+          onChange={(e) => setInputText(e.target.value)}
+          onKeyDown={(e) => e.key === "Enter" && handleSendText()}
           placeholder="Type your message..."
           className="flex-1 px-4 py-2 rounded-full border border-input bg-background text-foreground placeholder-muted-foreground focus:outline-none focus:ring-2 focus:ring-ring"
         />
         <button className="px-3 py-3 bg-green-700 text-primary-foreground rounded-full hover:bg-green-800 transition-colors font-medium">
-          <SendHorizonalIcon />
+          <SendHorizonalIcon onClick={handleSendText} />
         </button>
       </div>
     </div>
