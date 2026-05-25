@@ -30,7 +30,18 @@ interface Message {
 
 function renderMessage(message: Message) {
   const { senderId, text, type, content, createdAt, _id } = message;
-  const senderName = senderId.name;
+
+  // senderId object hai ya string?
+  const senderName =
+    typeof senderId === "object"
+      ? senderId.name // TanStack message → real name . // or sender ka naam
+      : "NeetAdvisor"; // Socket message → fallback
+  // 3 cases:
+  // 1. TanStack API → real sender name
+  // 2. Tera apna message → authStore.name
+  // 3. (future) agar socket object bheje → real name
+  // Socket string aaya → fallback
+
   switch (type) {
     case "text":
       return (
