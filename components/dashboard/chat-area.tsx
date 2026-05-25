@@ -217,7 +217,7 @@ export default function ChatArea() {
     <div className="flex flex-col gap-4 p-4 h-full bg-gray-100/80 rounded-lg">
       {isLoading ? (
         <ChatSkeletonLoader />
-      ) : allMessages?.length > 0 ? (
+      ) : allMessages?.length > 0 || liveMessage?.length > 0 ? (
         <div className="flex-1 overflow-y-auto space-y-4 ">
           {hasNextPage && !isFetchingNextPage && (
             <div
@@ -241,7 +241,9 @@ export default function ChatArea() {
             </div>
           )}
 
-          {allMessages?.map((message: Message) => renderMessage(message))}
+          {[...allMessages, ...liveMessage]?.map((message: Message) =>
+            renderMessage(message),
+          )}
         </div>
       ) : (
         <ChatEmptyState />
