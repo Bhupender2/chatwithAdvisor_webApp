@@ -49,6 +49,7 @@ export const useChatStore = create<ConversationState>()(
       clearChat: () => {
         set({
           conversationId: null, // conversation id is being null
+          liveMessages: [], // all the live Messages is also cleared
         });
       },
     }),
