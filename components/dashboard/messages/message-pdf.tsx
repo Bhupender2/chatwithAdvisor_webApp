@@ -1,11 +1,12 @@
 import { Card } from "@/components/ui/card";
-import { Download, FileText } from "lucide-react";
+import { Check, Download, FileText, Loader2, X } from "lucide-react";
 
 export default function PDFMessage({
   senderName,
   content,
   text,
   timestamp,
+  status,
 }: {
   senderName: string;
   content: string;
@@ -13,7 +14,9 @@ export default function PDFMessage({
   timestamp: string;
   status: "sending" | "sent" | "failed";
 }) {
-  const pdfUrl = `https://chat.neetadvisor.com/api/uploads/${text}`;
+  const pdfUrl = text.startsWith("blob:") // fix karo — sending mein text blob URL hoga, sent mein server URL
+    ? text // ← local blob URL (sending state)
+    : `https://chat.neetadvisor.com/api/uploads/${text}`; // ← server URL (sent)
 
   return (
     <div className="flex gap-3 mb-4">
@@ -44,13 +47,19 @@ export default function PDFMessage({
             <div className="w-12 h-12 rounded bg-green-100 flex items-center justify-center shrink-0">
               <FileText className="w-6 h-6 text-gray-600" />
             </div>
-
             {/* PDF Info */}
             <div className="flex-1 min-w-0">
               <p className="text-sm font-semibold text-gray-900">{content}</p>
               <p className="text-xs text-gray-500">PDF Document</p>
             </div>
-
+            {/* PDF Info ke neeche */}
+            <div className="flex justify-end mt-1">
+              {status === "sending" && (
+                <Loader2 className="w-6 h-6 animate-spin text-gray-400" />
+              )}
+              {status === "sent" && <Check className="w-6 h-6 text-gray-500" />}
+              {status === "failed" && <X className="w-6 h-6 text-red-500" />}
+            </div>
             {/* Download Button */}
             <a
               href={pdfUrl}
