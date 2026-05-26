@@ -13,8 +13,15 @@ const formatWhatsAppWithLinks = (text: string) => {
     .replace(/_(.*?)_/g, "<em>$1</em>") // _italic_
     .replace(/~(.*?)~/g, "<del>$1</del>") // ~strikethrough~
     .replace(
-      /(https?:\/\/[^\s]+|www\.[^\s]+|[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}(\/[^\s]*)?)/g,
-      '<a href="$1" target="_blank" rel="noopener noreferrer" class="text-blue-600 underline cursor-pointer break-all">$1</a>',
+      /(https?:\/\/[^\s]+)|(www\.[^\s]+)|([a-zA-Z0-9.-]+\.[a-zA-Z]{2,}(\/[^\s]*)?)/g,
+      (match, p1, p2, p3) => {
+        const href = p1
+          ? p1 // https:// wala → as is
+          : p2
+            ? `https://${p2}` // www. wala → https:// add
+            : `https://${p3}`; // plain domain → https:// add
+        return `<a href="${href}" target="_blank" rel="noopener noreferrer" class="text-blue-600 underline cursor-pointer break-all">${match}</a>`;
+      },
     );
 };
 
