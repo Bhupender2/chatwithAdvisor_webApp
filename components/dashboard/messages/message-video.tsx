@@ -14,7 +14,9 @@ export default function VideoMessage({
   timestamp: string;
   status: "Sending" | "sent" | "failed";
 }) {
-  const videoUrl = `https://chat.neetadvisor.com/api/uploads/${text}`;
+  const videoUrl = text.startsWith("blob:")
+    ? text
+    : `https://chat.neetadvisor.com/api/uploads/${text}`;
 
   return (
     <div className="flex gap-3 mb-4">
