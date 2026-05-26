@@ -256,13 +256,19 @@ export default function ChatArea() {
       {/* Input */}
       <div className="flex gap-2 items-center">
         <AddDropDownMenu />
-        <input
-          type="text"
+        {/* Fix */}
+        <textarea
           value={inputText}
           onChange={(e) => setInputText(e.target.value)}
-          onKeyDown={(e) => e.key === "Enter" && handleSendText()}
+          onKeyDown={(e) => {
+            if (e.key === "Enter" && !e.shiftKey) {
+              e.preventDefault();
+              handleSendText();
+            }
+          }}
+          rows={1}
           placeholder="Type your message..."
-          className="flex-1 px-4 py-2 rounded-full border border-input bg-background text-foreground placeholder-muted-foreground focus:outline-none focus:ring-2 focus:ring-ring"
+          className="flex-1 px-4 py-2 rounded-full border border-input bg-background text-foreground placeholder-muted-foreground focus:outline-none focus:ring-2 focus:ring-ring resize-none"
         />
         <button className="px-3 py-3 bg-green-700 text-primary-foreground rounded-full hover:bg-green-800 transition-colors font-medium">
           <SendHorizonalIcon onClick={handleSendText} />

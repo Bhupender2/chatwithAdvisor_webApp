@@ -38,7 +38,9 @@ export default function TextMessage({
           </span>
         </div>
         <Card className="bg-[#d6f3cf] border-none rounded-lg p-3 max-w-md flex flex-row space-x-2">
-          <p className="text-sm text-gray-700 flex-1">{content}</p>
+          <p className="text-sm text-gray-700 flex-1 whitespace-pre-wrap">
+            {content}
+          </p>
           {/* Status icons */}
           <div className="flex justify-end mt-1">
             {status === "sending" && (
