@@ -11,6 +11,7 @@ export default function PDFMessage({
   content: string;
   text: string;
   timestamp: string;
+  status: "sending" | "sent" | "failed";
 }) {
   const pdfUrl = `https://chat.neetadvisor.com/api/uploads/${text}`;
 
