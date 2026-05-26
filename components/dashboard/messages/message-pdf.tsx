@@ -12,7 +12,7 @@ export default function PDFMessage({
   content: string;
   text: string;
   timestamp: string;
-  status: "sending" | "sent" | "failed";
+  status?: "sending" | "sent" | "failed";
 }) {
   const pdfUrl = text.startsWith("blob:") // fix karo — sending mein text blob URL hoga, sent mein server URL
     ? text // ← local blob URL (sending state)

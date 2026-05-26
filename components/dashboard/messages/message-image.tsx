@@ -1,4 +1,5 @@
 import { Card } from "@/components/ui/card";
+import { Check, Loader2, X } from "lucide-react";
 import Image from "next/image";
 
 export default function ImageMessage({
@@ -12,9 +13,11 @@ export default function ImageMessage({
   content: string;
   text: string;
   timestamp: string;
-  status: "sending" | "sent" | "failed";
+  status?: "sending" | "sent" | "failed";
 }) {
-  const imageUrl = `https://chat.neetadvisor.com/api/uploads/${text}`;
+  const imageUrl = text.startsWith("blob:")
+    ? text
+    : `https://chat.neetadvisor.com/api/uploads/${text}`;
 
   return (
     <div className="flex gap-3 mb-4">
@@ -51,12 +54,22 @@ export default function ImageMessage({
                 target.style.display = "none";
               }}
             />
+            {status === "sending" && (
+              <div className="absolute inset-0 flex items-center justify-center bg-black/20 rounded-lg">
+                <Loader2 className="w-8 h-8 animate-spin text-green-700" />
+              </div>
+            )}
           </div>
           {content && (
             <div className="p-1">
               <p className="text-sm text-gray-800">{content}</p>
             </div>
           )}
+
+          <div className="flex justify-end p-1">
+            {status === "sent" && <Check className="w-3 h-3 text-gray-500" />}
+            {status === "failed" && <X className="w-3 h-3 text-red-500" />}
+          </div>
         </Card>
       </div>
     </div>
