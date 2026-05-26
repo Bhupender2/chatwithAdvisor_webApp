@@ -2,6 +2,22 @@ import { Card } from "@/components/ui/card";
 import { Check, Clock, X } from "lucide-react";
 import Linkify from "linkify-react";
 
+// format function
+
+// Linkify hatao — seedha dangerouslySetInnerHTML use karo
+// Linkify bhi HTML mein handle karo format function mein:
+
+const formatWhatsAppWithLinks = (text: string) => {
+  return text
+    .replace(/\*(.*?)\*/g, "<strong>$1</strong>") // *bold*
+    .replace(/_(.*?)_/g, "<em>$1</em>") // _italic_
+    .replace(/~(.*?)~/g, "<del>$1</del>") // ~strikethrough~
+    .replace(
+      /(https?:\/\/[^\s]+|www\.[^\s]+|[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}(\/[^\s]*)?)/g,
+      '<a href="$1" target="_blank" rel="noopener noreferrer" class="text-blue-600 underline cursor-pointer break-all">$1</a>',
+    );
+};
+
 export default function TextMessage({
   senderName,
   content,
@@ -46,9 +62,12 @@ export default function TextMessage({
               className: "text-blue-600 underline cursor-pointer break-all",
             }}
           >
-            <p className="text-sm text-gray-700 flex-1 whitespace-pre-wrap">
-              {content}
-            </p>
+            <p
+              className="text-sm text-gray-700 flex-1 whitespace-pre-wrap"
+              dangerouslySetInnerHTML={{
+                __html: formatWhatsAppWithLinks(content),
+              }}
+            />
           </Linkify>
           {/* Status icons */}
           <div className="flex justify-end mt-1">

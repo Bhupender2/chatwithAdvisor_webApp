@@ -18,6 +18,8 @@ export default function DashboardSidebar() {
   const { data: defaultGroups = [], isLoading } = useFetchGroups();
   const setConversationId = useChatStore((state) => state.setConversationId);
 
+  const converationId = useChatStore((state) => state.conversationId);
+
   const iconMap: Record<string, React.ElementType> = {
     "NEET PG": Database,
     "NEET PG OD": BookOpen,
@@ -71,7 +73,7 @@ export default function DashboardSidebar() {
                 return (
                   <SidebarMenuItem
                     key={group.conversationId}
-                    className="py-2"
+                    className={`py-2 ${converationId === group.conversationId ? "bg-[#d6f3cf] hover:bg-[#d6f3cf]" : ""}`}
                     onClick={() => {
                       setConversationId(group.conversationId);
                     }}
