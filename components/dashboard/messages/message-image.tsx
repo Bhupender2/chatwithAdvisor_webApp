@@ -6,11 +6,13 @@ export default function ImageMessage({
   content,
   text,
   timestamp,
+  status,
 }: {
   senderName: string;
   content: string;
   text: string;
   timestamp: string;
+  status: "sending" | "sent" | "failed";
 }) {
   const imageUrl = `https://chat.neetadvisor.com/api/uploads/${text}`;
 

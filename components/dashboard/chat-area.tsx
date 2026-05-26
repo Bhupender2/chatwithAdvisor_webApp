@@ -62,6 +62,7 @@ function renderMessage(message: Message) {
           content={content}
           text={text}
           timestamp={createdAt}
+          status={(message as any).status}
         />
       );
     case "video":
@@ -72,6 +73,7 @@ function renderMessage(message: Message) {
           content={content}
           text={text}
           timestamp={createdAt}
+          status={(message as any).status}
         />
       );
     case "pdf":

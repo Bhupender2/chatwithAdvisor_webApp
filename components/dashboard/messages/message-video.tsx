@@ -6,11 +6,13 @@ export default function VideoMessage({
   content,
   text,
   timestamp,
+  status,
 }: {
   senderName: string;
   content: string;
   text: string;
   timestamp: string;
+  status: "Sending" | "sent" | "failed";
 }) {
   const videoUrl = `https://chat.neetadvisor.com/api/uploads/${text}`;
 
