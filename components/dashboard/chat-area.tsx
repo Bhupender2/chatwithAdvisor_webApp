@@ -11,7 +11,7 @@ import PDFMessage from "./messages/message-pdf";
 import AudioMessage from "./messages/message-audio";
 import { ChatSkeletonLoader } from "./chat-skeleton-loader";
 import { ChatEmptyState } from "./chat-empty-state";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { useAuthStore } from "@/store/auth-store";
 import { getSocket } from "@/services/socket-service";
 
@@ -105,6 +105,7 @@ function renderMessage(message: Message) {
 export default function ChatArea() {
   const conversationId = useChatStore((state) => state.conversationId);
   const [inputText, setInputText] = useState("");
+  const scrollRef = useRef<HTMLDivElement>(null);
 
   const addMessage = useChatStore((state) => state.addMessage);
   const updateMessageStatus = useChatStore(
@@ -169,6 +170,14 @@ export default function ChatArea() {
     };
   }, [conversationId]);
 
+  // useffect
+
+  useEffect(() => {
+    if (scrollRef.current) {
+      scrollRef.current.scrollTop = scrollRef.current.scrollHeight;
+    }
+  }, [liveMessage]);
+
   const {
     data: previousChats,
     isLoading,
@@ -222,7 +231,7 @@ export default function ChatArea() {
       {isLoading ? (
         <ChatSkeletonLoader />
       ) : allMessages?.length > 0 || liveMessage?.length > 0 ? (
-        <div className="flex-1 overflow-y-auto space-y-4 ">
+        <div className="flex-1 overflow-y-auto space-y-4 " ref={scrollRef}>
           {hasNextPage && !isFetchingNextPage && (
             <div
               className="w-fit drop-shadow-2xl px-6 py-2 rounded-md text-xs mx-auto bg-white cursor-pointer text-gray-700 hover:scale-110 transition-all duration-300 ease-in-out"
