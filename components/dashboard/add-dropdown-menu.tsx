@@ -28,8 +28,10 @@ export function AddDropDownMenu() {
   const name = useAuthStore((state) => state.name);
   const role = useAuthStore((state) => state.role);
 
-  const handleUpload = (file: File, type: "image" | "video" | "pdf") => {
-    const tempId = `temp_${Date.now()}`;
+  const handleUpload = async (file: File, type: "image" | "video" | "pdf") => {
+    const tempId = `temp_${Date.now()}_${Math.random()}`; // every id will be different now
+
+    console.log("TEMP ID CREATED:", tempId); // ← add karo
 
     // step 1  turant ui mein add karde
     addMessage({
@@ -47,21 +49,31 @@ export function AddDropDownMenu() {
       text: URL.createObjectURL(file), // ← local preview ke liye
     });
 
-    uploadMutation.mutate(
-      {
+    // uploadMutation.mutate(
+    //   {
+    //     file,
+    //     content: type == "pdf" ? file.name : "",
+    //   },
+
+    //   {
+    //     onSuccess: (data) => {
+    //       console.log("UPDATING:", tempId, "→", data.data._id); // ← add karo
+    //       updateMessageStatus(tempId, data.data._id, "sent");
+    //     },
+    //     onError: () => {
+    //       updateMessageStatus(tempId, tempId, "failed");
+    //     },
+    //   },
+    // );
+    try {
+      const data = await uploadMutation.mutateAsync({
         file,
         content: type == "pdf" ? file.name : "",
-      },
-
-      {
-        onSuccess: (data) => {
-          updateMessageStatus(tempId, data.data._id, "sent");
-        },
-        onError: () => {
-          updateMessageStatus(tempId, tempId, "failed");
-        },
-      },
-    );
+      });
+      updateMessageStatus(tempId, data.data._id, "sent");
+    } catch {
+      updateMessageStatus(tempId, tempId, "failed");
+    }
   };
 
   return (
@@ -71,9 +83,10 @@ export function AddDropDownMenu() {
         type="file"
         accept="image/*"
         className="hidden"
+        multiple
         onChange={(e) => {
-          const file = e.target.files?.[0];
-          if (file) handleUpload(file, "image");
+          const files = Array.from(e.target.files || []); // ← sab files
+          files.forEach((file) => handleUpload(file, "image")); // ← har ek ke liye
         }}
       />
       <input
@@ -81,9 +94,10 @@ export function AddDropDownMenu() {
         type="file"
         accept="video/*"
         className="hidden"
+        multiple
         onChange={(e) => {
-          const file = e.target.files?.[0];
-          if (file) handleUpload(file, "video");
+          const files = Array.from(e.target.files || []); // all files
+          files.forEach((file) => handleUpload(file, "video")); // for each files
         }}
       />
       <input
@@ -91,9 +105,10 @@ export function AddDropDownMenu() {
         type="file"
         accept=".pdf"
         className="hidden"
+        multiple
         onChange={(e) => {
-          const file = e.target.files?.[0];
-          if (file) handleUpload(file, "pdf");
+          const files = Array.from(e.target.files || []); // all files aajaegi
+          files.forEach((file) => handleUpload(file, "pdf")); // for each files
         }}
       />
       <DropdownMenu>
@@ -119,3 +134,12 @@ export function AddDropDownMenu() {
     </>
   );
 }
+
+//// mutateAsync use kiya kyunki multiple files ek saath upload ho rahi hain.
+// mutate ek single instance hota hai — nayi call aane pe purani cancel ho jaati hai
+// isliye sirf last file ka onSuccess fire hota tha, baaki sab stuck "sending" mein rehte the.
+// mutateAsync har file ko apna alag promise deta hai — sab parallel chalte hain, koi cancel nahi hota ✅
+// const data = await uploadMutation.mutateAsync({
+//   file,
+//   content: type === "pdf" ? file.name : "",
+// });
