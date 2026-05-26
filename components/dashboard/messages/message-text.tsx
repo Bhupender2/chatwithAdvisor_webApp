@@ -1,5 +1,6 @@
 import { Card } from "@/components/ui/card";
 import { Check, Clock, X } from "lucide-react";
+import Linkify from "linkify-react";
 
 export default function TextMessage({
   senderName,
@@ -38,9 +39,17 @@ export default function TextMessage({
           </span>
         </div>
         <Card className="bg-[#d6f3cf] border-none rounded-lg p-3 max-w-md flex flex-row space-x-2">
-          <p className="text-sm text-gray-700 flex-1 whitespace-pre-wrap">
-            {content}
-          </p>
+          <Linkify
+            options={{
+              target: "_blank",
+              rel: "noopener noreferrer",
+              className: "text-blue-600 underline cursor-pointer break-all",
+            }}
+          >
+            <p className="text-sm text-gray-700 flex-1 whitespace-pre-wrap">
+              {content}
+            </p>
+          </Linkify>
           {/* Status icons */}
           <div className="flex justify-end mt-1">
             {status === "sending" && (
