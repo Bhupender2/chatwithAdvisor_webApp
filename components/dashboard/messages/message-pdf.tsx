@@ -55,7 +55,7 @@ export default function PDFMessage({
             {/* PDF Info ke neeche */}
             <div className="flex justify-end mt-1">
               {status === "sending" && (
-                <Loader2 className="w-6 h-6 animate-spin text-gray-400" />
+                <Loader2 className="w-6 h-6 animate-spin text-green-800" />
               )}
               {status === "sent" && <Check className="w-6 h-6 text-gray-500" />}
               {status === "failed" && <X className="w-6 h-6 text-red-500" />}
