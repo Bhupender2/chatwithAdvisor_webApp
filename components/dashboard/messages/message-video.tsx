@@ -1,5 +1,5 @@
 import { Card } from "@/components/ui/card";
-import { Play } from "lucide-react";
+import { Check, Loader2, Play, X } from "lucide-react";
 
 export default function VideoMessage({
   senderName,
@@ -12,7 +12,7 @@ export default function VideoMessage({
   content: string;
   text: string;
   timestamp: string;
-  status: "Sending" | "sent" | "failed";
+  status: "sending" | "sent" | "failed";
 }) {
   const videoUrl = text.startsWith("blob:")
     ? text
@@ -52,12 +52,22 @@ export default function VideoMessage({
             {/* <div className="absolute inset-0 bg-black/30 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
               <Play className="w-12 h-12 text-white" />
             </div> */}
+
+            {status === "sending" && (
+              <div className="absolute inset-0 flex items-center justify-center bg-black/20 rounded-lg">
+                <Loader2 className="w-8 h-8 animate-spin text-green-700" />
+              </div>
+            )}
           </div>
           {content && (
             <div className="p-1">
               <p className="text-sm text-gray-800">{content}</p>
             </div>
           )}
+          <div className="flex justify-end p-1">
+            {status === "sent" && <Check className="w-3 h-3 text-gray-500" />}
+            {status === "failed" && <X className="w-3 h-3 text-red-500" />}
+          </div>
         </Card>
       </div>
     </div>
