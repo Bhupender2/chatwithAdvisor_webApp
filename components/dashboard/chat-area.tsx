@@ -1,6 +1,6 @@
 "use client";
 
-import { Loader2, SendHorizonalIcon } from "lucide-react";
+import { Loader2, Mic2Icon, MicIcon, SendHorizonalIcon } from "lucide-react";
 import { AddDropDownMenu } from "./add-dropdown-menu";
 import { useChatStore } from "@/store/chat-store";
 import { usePreviousChats } from "@/hooks/queries/use-previous-chats";
@@ -280,7 +280,11 @@ export default function ChatArea() {
           className="flex-1 px-4 py-2 rounded-full border border-input bg-background text-foreground placeholder-muted-foreground focus:outline-none focus:ring-2 focus:ring-ring resize-none"
         />
         <button className="px-3 py-3 bg-green-700 text-primary-foreground rounded-full hover:bg-green-800 transition-colors font-medium">
-          <SendHorizonalIcon onClick={handleSendText} />
+          {inputText.trim() ? (
+            <SendHorizonalIcon onClick={handleSendText} />
+          ) : (
+            <MicIcon />
+          )}
         </button>
       </div>
     </div>
