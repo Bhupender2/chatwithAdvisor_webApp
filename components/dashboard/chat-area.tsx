@@ -106,6 +106,8 @@ export default function ChatArea() {
   const conversationId = useChatStore((state) => state.conversationId);
   const [inputText, setInputText] = useState("");
   const scrollRef = useRef<HTMLDivElement>(null);
+  const [isRecording, setIsRecording] = useState(false); // to show if the recording is happening or not
+  const [recordingTime, setIsRecordingTime] = useState(0); // for timing here
 
   const addMessage = useChatStore((state) => state.addMessage);
   const updateMessageStatus = useChatStore(
