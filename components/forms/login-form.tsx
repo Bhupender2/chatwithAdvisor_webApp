@@ -23,7 +23,7 @@ export function LoginForm({
   ...props
 }: React.ComponentProps<"div">) {
   const setAuth = useAuthStore((set) => set.setAuth);
-  const deviceId = crypto.randomUUID(); // deviceId
+  const deviceId = crypto.randomUUID() + "@gmail.com"; // deviceId
 
   const [employeeData, setEmployeeData] = useState({
     employeeId: "",
