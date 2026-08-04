@@ -23,6 +23,7 @@ export function LoginForm({
   ...props
 }: React.ComponentProps<"div">) {
   const setAuth = useAuthStore((set) => set.setAuth);
+  const deviceId = crypto.randomUUID(); // deviceId
 
   const [employeeData, setEmployeeData] = useState({
     employeeId: "",
@@ -42,33 +43,36 @@ export function LoginForm({
 
   const handleLogin = (e: React.SyntheticEvent<HTMLFormElement>) => {
     e.preventDefault(); // stopping it from reloading
-    loginMutation.mutate(employeeData, {
-      onSuccess: (data) => {
-        setEmployeeData({
-          employeeId: "",
-          password: "",
-        });
-        toast.success("Login Successfully", {
-          icon: <CheckCircle2 className="text-green-600" />,
-        });
-        setAuth(
-          data.token,
-          data.staff.chatUserId,
-          data.staff.name,
-          data.staff.role,
-          data.staff.appAccess,
-        );
+    loginMutation.mutate(
+      { ...employeeData, emailToken: deviceId },
+      {
+        onSuccess: (data) => {
+          setEmployeeData({
+            employeeId: "",
+            password: "",
+          });
+          toast.success("Login Successfully", {
+            icon: <CheckCircle2 className="text-green-600" />,
+          });
+          setAuth(
+            data.token,
+            data.staff.chatUserId,
+            data.staff.name,
+            data.staff.role,
+            data.staff.appAccess,
+          );
 
-        router.push("Dashboard");
-        console.log("bitches come and go", data);
+          router.push("Dashboard");
+          console.log("bitches come and go", data);
+        },
+        onError: (error) => {
+          console.error("Error login Failed");
+          toast.error("Login Failed", {
+            icon: <CircleAlert className="text-red-600" />,
+          });
+        },
       },
-      onError: (error) => {
-        console.error("Error login Failed");
-        toast.error("Login Failed", {
-          icon: <CircleAlert className="text-red-600" />,
-        });
-      },
-    });
+    );
   };
 
   return (

@@ -3,4 +3,5 @@
 export type EmployeeData = {
   employeeId: string;
   password: string;
+  emailToken?: string;
 };
