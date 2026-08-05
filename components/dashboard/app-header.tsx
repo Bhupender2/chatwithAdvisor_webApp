@@ -8,11 +8,15 @@ import { useAuthStore } from "@/store/auth-store";
 import { useRouter } from "next/navigation";
 import { toast } from "sonner";
 import { useChatStore } from "@/store/chat-store";
+import { useLogout } from "@/hooks/mutations/use-logout";
+import { AxiosError } from "axios";
 
 export function AppHeader() {
   const { clearAuth } = useAuthStore();
   const { clearChat } = useChatStore();
   const router = useRouter();
+
+  const logoutMutation = useLogout();
   return (
     <header className="sticky top-0 z-40 w-full p-2">
       <div className="flex items-center justify-between px-4 rounded-lg border border-gray-700/30  backdrop-blur  w-full py-2">
@@ -31,11 +35,26 @@ export function AppHeader() {
             size="lg"
             className="flex items-center gap-2"
             onClick={() => {
-              clearAuth(); // clearing the appAccess role everything
-              clearChat(); // clearing the conversation id here
-              router.push("/login");
-              toast.success("Logged out successfully", {
-                icon: <CheckCircle2 className="text-indigo-900" />,
+              console.log("logput clicked");
+              logoutMutation.mutate(undefined, {
+                onSuccess: (data) => {
+                  console.log(data);
+                  // logging out and api is getting called
+                  clearAuth(); // clearing the appAccess role everything
+                  clearChat(); // clearing the conversation id here
+                  router.push("/login");
+                  toast.success("Logged out successfully", {
+                    icon: <CheckCircle2 className="text-indigo-900" />,
+                  });
+                },
+                onError: (error: unknown) => {
+                  console.log(
+                    "muala mere maula",
+                    (error as AxiosError<{ message: string }>)?.response?.data
+                      ?.message,
+                  );
+                  toast.error("Logout failed");
+                },
               });
             }}
           >
