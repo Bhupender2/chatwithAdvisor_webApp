@@ -5,6 +5,5 @@ export const API_GROUPS = {
   getDefaultGroup: `${BASE_URL}/conversation/getAlertConversations`,
   getPreviousChat: `${BASE_URL}/chat/getPreviousChat`,
   upload: `${BASE_URL}/upload`,
-  logout: `${BASE_URL}/staffLogout
-`,
+  logout: `${BASE_URL}/staffLogout`,
 };

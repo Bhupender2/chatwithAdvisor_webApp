@@ -8,6 +8,7 @@ interface AuthState {
   role: string | null;
   appAccess?: string | null;
   notificationToken?: string | null;
+  accessToken: string | null;
   pkg?: string | null;
   setAuth: (
     token?: string,
@@ -15,6 +16,7 @@ interface AuthState {
     name?: string,
     role?: string,
     appAccess?: string,
+    accessToken?: string,
     pkg?: string,
   ) => void;
   // setNotificationToken: (notificationToken: string) => void;
@@ -29,9 +31,10 @@ export const useAuthStore = create<AuthState>()(
       name: null,
       role: null,
       appAccess: null,
+      accessToken: null,
       // notificationToken: null,
       pkg: null,
-      setAuth: (token, senderId, name, role, appAccess, pkg) => {
+      setAuth: (token, senderId, name, role, appAccess, accessToken, pkg) => {
         set((state) => ({
           ...state,
           token: token,
@@ -39,6 +42,7 @@ export const useAuthStore = create<AuthState>()(
           name: name,
           role: role,
           appAccess: appAccess,
+          accessToken: accessToken,
           pkg: pkg,
         }));
       },
@@ -55,6 +59,7 @@ export const useAuthStore = create<AuthState>()(
           name: null,
           role: null,
           appAccess: null,
+          accessToken: null,
           pkg: null,
         });
       },

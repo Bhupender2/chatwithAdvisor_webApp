@@ -60,6 +60,7 @@ export function LoginForm({
             data.staff.name,
             data.staff.role,
             data.staff.appAccess,
+            data.accessToken,
           );
 
           router.push("Dashboard");
