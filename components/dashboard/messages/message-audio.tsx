@@ -44,7 +44,7 @@ export default function AudioMessage({
             {new Date(timestamp).toLocaleTimeString()}
           </span>
         </div>
-        <Card className="border-none rounded-lg   p-3 max-w-sm">
+        <Card className="border-none rounded-lg   p-3 max-w-sm relative group">
           {/* dropdown icon */}
           <MessageActionMenu
             messageId={messageId}

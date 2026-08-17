@@ -46,7 +46,7 @@ export default function VideoMessage({
             {new Date(timestamp).toLocaleTimeString()}
           </span>
         </div>
-        <Card className="border-none rounded-lg overflow-hidden max-w-sm bg-[#d6f3cf] gap-0 py-0 p-1">
+        <Card className="border-none rounded-lg overflow-hidden max-w-sm bg-[#d6f3cf] gap-0 py-0 p-1 relative group">
           {/* dropdown icon */}
 
           <MessageActionMenu

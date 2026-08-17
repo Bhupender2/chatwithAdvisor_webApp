@@ -46,7 +46,7 @@ export default function PDFMessage({
             {new Date(timestamp).toLocaleTimeString()}
           </span>
         </div>
-        <Card className="rounded-lg   p-3 max-w-sm hover:shadow-md transition-shadow">
+        <Card className="rounded-lg   p-3 max-w-sm hover:shadow-md transition-shadow relative group">
           {/* dropdown icon */}
 
           <MessageActionMenu

@@ -47,7 +47,7 @@ export default function ImageMessage({
             {new Date(timestamp).toLocaleTimeString()}
           </span>
         </div>
-        <Card className="border-none rounded-lg overflow-hidden max-w-sm bg-[#d6f3cf] p-1 gap-0">
+        <Card className="border-none rounded-lg overflow-hidden max-w-sm bg-[#d6f3cf] p-1 gap-0 relative group">
           <MessageActionMenu
             messageId={messageId}
             onDelete={() => onDelete(messageId)}
