@@ -6,4 +6,5 @@ export const API_GROUPS = {
   getPreviousChat: `${BASE_URL}/chat/getPreviousChat`,
   upload: `${BASE_URL}/upload`,
   logout: `${BASE_URL}/staffLogout`,
+  deleteForEveryone: `${BASE_URL}/chat/deleteMessageForEveryOne`,
 };
