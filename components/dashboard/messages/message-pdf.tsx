@@ -1,5 +1,6 @@
 import { Card } from "@/components/ui/card";
 import { Check, Download, FileText, Loader2, X } from "lucide-react";
+import MessageActionMenu from "../message-action-menu";
 
 export default function PDFMessage({
   senderName,
@@ -7,12 +8,16 @@ export default function PDFMessage({
   text,
   timestamp,
   status,
+  messageId,
+  onDelete,
 }: {
   senderName: string;
   content: string;
   text: string;
   timestamp: string;
-  status?: "sending" | "sent" | "failed";
+  status?: "sending" | "sent" | "failed"; // ← add karo
+  messageId: string;
+  onDelete: (id: string) => void; // ← string parameter chahiye
 }) {
   const pdfUrl = text.startsWith("blob:") // fix karo — sending mein text blob URL hoga, sent mein server URL
     ? text // ← local blob URL (sending state)
@@ -42,6 +47,12 @@ export default function PDFMessage({
           </span>
         </div>
         <Card className="rounded-lg   p-3 max-w-sm hover:shadow-md transition-shadow">
+          {/* dropdown icon */}
+
+          <MessageActionMenu
+            messageId={messageId}
+            onDelete={() => onDelete(messageId)}
+          />
           <div className="flex items-center gap-3">
             {/* PDF Icon */}
             <div className="w-12 h-12 rounded bg-green-100 flex items-center justify-center shrink-0">

@@ -1,5 +1,6 @@
 import { Card } from "@/components/ui/card";
 import { Check, Loader2, Play, X } from "lucide-react";
+import MessageActionMenu from "../message-action-menu";
 
 export default function VideoMessage({
   senderName,
@@ -7,12 +8,17 @@ export default function VideoMessage({
   text,
   timestamp,
   status,
+  status,
+  messageId,
+  onDelete,
 }: {
   senderName: string;
   content: string;
   text: string;
   timestamp: string;
-  status: "sending" | "sent" | "failed";
+  status?: "sending" | "sent" | "failed"; // ← add karo
+  messageId: string;
+  onDelete: (id: string) => void; // ← string parameter chahiye
 }) {
   const videoUrl = text.startsWith("blob:")
     ? text
@@ -42,6 +48,12 @@ export default function VideoMessage({
           </span>
         </div>
         <Card className="border-none rounded-lg overflow-hidden max-w-sm bg-[#d6f3cf] gap-0 py-0 p-1">
+          {/* dropdown icon */}
+
+          <MessageActionMenu
+            messageId={messageId}
+            onDelete={() => onDelete(messageId)}
+          />
           <div className="relative w-full h-60 flex items-center justify-center group cursor-pointer">
             <video
               src={videoUrl}
