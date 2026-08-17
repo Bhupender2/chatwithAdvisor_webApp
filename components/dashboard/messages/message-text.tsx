@@ -8,6 +8,7 @@ import {
   X,
 } from "lucide-react";
 import Linkify from "linkify-react";
+import MessageActionMenu from "../message-action-menu";
 
 // format function
 
@@ -71,7 +72,7 @@ export default function TextMessage({
         <Card className="bg-[#d6f3cf] border-none rounded-lg p-3 max-w-md flex flex-row space-x-2 relative group">
           {/* dropdown icon */}
 
-          <ChevronDown className="opacity-0 hover:opacity-100 absolute top-1 -right-1 h-4 w-4 text-gray-600" />
+          <MessageActionMenu />
           <Linkify
             options={{
               target: "_blank",

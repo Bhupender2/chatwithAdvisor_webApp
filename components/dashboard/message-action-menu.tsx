@@ -24,10 +24,10 @@ export default function MessageActionMenu({
           <ChevronDown className="h-4 w-4 text-gray-600" />
         </button>
       </DropdownMenuTrigger>
-      <DropdownMenuContent align="end">
+      <DropdownMenuContent align="end" className="w-48 h-10">
         <DropdownMenuItem
           // onClick={() => onDelete?.(messageId)}
-          className="text-red-600 focus:text-red-600"
+          className="text-red-600 focus:text-red-600 whitespace-nowrap"
         >
           Delete for everyone
         </DropdownMenuItem>
