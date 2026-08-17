@@ -40,6 +40,7 @@ export default function TextMessage({
   timestamp,
   status,
   messageId,
+  onDelete,
 }: {
   senderName: string;
   content: string;
@@ -47,6 +48,7 @@ export default function TextMessage({
   timestamp: string;
   status?: "sending" | "sent" | "failed"; // ← add karo
   messageId: string;
+  onDelete: (id: string) => void; // ← string parameter chahiye
 }) {
   return (
     <div className="flex gap-3 mb-4">
@@ -74,7 +76,10 @@ export default function TextMessage({
         <Card className="bg-[#d6f3cf] border-none rounded-lg p-3 max-w-md flex flex-row space-x-2 relative group">
           {/* dropdown icon */}
 
-          <MessageActionMenu />
+          <MessageActionMenu
+            messageId={messageId}
+            onDelete={() => onDelete(messageId)}
+          />
           <Linkify
             options={{
               target: "_blank",

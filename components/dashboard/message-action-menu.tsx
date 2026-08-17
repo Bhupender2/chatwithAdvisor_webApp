@@ -26,7 +26,7 @@ export default function MessageActionMenu({
       </DropdownMenuTrigger>
       <DropdownMenuContent align="end" className="w-48 h-10">
         <DropdownMenuItem
-          // onClick={() => onDelete?.(messageId)}
+          onClick={() => onDelete?.(messageId)}
           className="text-red-600 focus:text-red-600 whitespace-nowrap"
         >
           Delete for everyone
