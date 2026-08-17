@@ -8,7 +8,6 @@ export default function VideoMessage({
   text,
   timestamp,
   status,
-  status,
   messageId,
   onDelete,
 }: {
