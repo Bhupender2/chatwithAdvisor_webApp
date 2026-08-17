@@ -1,6 +1,7 @@
 import { Card } from "@/components/ui/card";
 import { Check, Loader2, X } from "lucide-react";
 import Image from "next/image";
+import MessageActionMenu from "../message-action-menu";
 
 export default function ImageMessage({
   senderName,
@@ -8,12 +9,16 @@ export default function ImageMessage({
   text,
   timestamp,
   status,
+  messageId,
+  onDelete,
 }: {
   senderName: string;
   content: string;
   text: string;
   timestamp: string;
-  status?: "sending" | "sent" | "failed";
+  status?: "sending" | "sent" | "failed"; // ← add karo
+  messageId: string;
+  onDelete: (id: string) => void; // ← string parameter chahiye
 }) {
   const imageUrl = text.startsWith("blob:")
     ? text
@@ -43,6 +48,10 @@ export default function ImageMessage({
           </span>
         </div>
         <Card className="border-none rounded-lg overflow-hidden max-w-sm bg-[#d6f3cf] p-1 gap-0">
+          <MessageActionMenu
+            messageId={messageId}
+            onDelete={() => onDelete(messageId)}
+          />
           <div className="relative w-full min-h-120 rounded-lg">
             <Image
               src={imageUrl}
