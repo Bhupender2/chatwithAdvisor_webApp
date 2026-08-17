@@ -45,7 +45,9 @@ function renderMessage(message: Message) {
 
   // delete check
   if ((message as any).status === "deleted") {
-    return <DeletedMessage key={_id} />;
+    return (
+      <DeletedMessage key={_id} senderName={senderName} timestamp={createdAt} />
+    );
   }
 
   switch (type) {
