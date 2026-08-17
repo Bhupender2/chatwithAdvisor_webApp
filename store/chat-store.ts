@@ -13,7 +13,8 @@ interface Message {
   type: "text" | "image" | "video" | "audio" | "pdf";
   text?: string; // like when i am getting text it doesnt have the text key others have
   createdAt: string;
-  status: "sending" | "sent" | "failed";
+  status: "sending" | "sent" | "failed" | "deleted";
+  deletedForEveryone?: boolean; // status has been added here
 }
 
 interface ConversationState {
