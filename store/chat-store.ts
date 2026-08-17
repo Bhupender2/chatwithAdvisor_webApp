@@ -25,7 +25,7 @@ interface ConversationState {
   updateMessageStatus: (
     tempId: string,
     realId: string,
-    status: "sending" | "sent" | "failed",
+    status: "sending" | "sent" | "failed" | "deleted",
   ) => void;
   clearMessages: () => void;
   clearChat: () => void;

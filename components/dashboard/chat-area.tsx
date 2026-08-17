@@ -15,6 +15,7 @@ import { useState, useEffect, useRef } from "react";
 import { useAuthStore } from "@/store/auth-store";
 import { getSocket } from "@/services/socket-service";
 import DeletedMessage from "./messages/message-delete";
+import { useDeleteMessage } from "@/hooks/mutations/useDeleteMessage";
 
 interface Message {
   _id: string;
@@ -111,6 +112,7 @@ function renderMessage(message: Message) {
 }
 
 export default function ChatArea() {
+  const { mutate: deleteMessage } = useDeleteMessage();
   const conversationId = useChatStore((state) => state.conversationId);
   const [inputText, setInputText] = useState("");
   const scrollRef = useRef<HTMLDivElement>(null);
@@ -170,6 +172,11 @@ export default function ChatArea() {
         senderId: data.senderId, // string aayega → renderMessage handle karega
         text: data.text,
       });
+    });
+
+    // deleted message
+    socket.on("message_deleted", (data) => {
+      updateMessageStatus(data.messageId, data.messageId, "deleted");
     });
 
     return () => {
@@ -239,6 +246,10 @@ export default function ChatArea() {
       content: inputText,
       conversationId: conversationId,
     });
+  };
+
+  const handleDelete = (messageId: string) => {
+    deleteMessage(messageId);
   };
   return (
     <div className="flex flex-col gap-4 p-4 h-full bg-gray-100/80 rounded-lg">
