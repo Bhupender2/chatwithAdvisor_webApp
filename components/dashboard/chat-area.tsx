@@ -30,87 +30,6 @@ interface Message {
   createdAt: string;
 }
 
-function renderMessage(message: Message) {
-  const { senderId, text, type, content, createdAt, _id } = message;
-
-  // senderId object hai ya string?
-  const senderName =
-    typeof senderId === "object"
-      ? senderId.name // TanStack message → real name . // or sender ka naam
-      : "NeetAdvisor"; // Socket message → fallback
-  // 3 cases:
-  // 1. TanStack API → real sender name
-  // 2. Tera apna message → authStore.name
-  // 3. (future) agar socket object bheje → real name
-  // Socket string aaya → fallback
-
-  // delete check
-  if ((message as any).status === "deleted") {
-    return (
-      <DeletedMessage key={_id} senderName={senderName} timestamp={createdAt} />
-    );
-  }
-
-  switch (type) {
-    case "text":
-      return (
-        <TextMessage
-          key={_id}
-          senderName={senderName}
-          content={content}
-          text={text}
-          timestamp={createdAt}
-          status={(message as any).status}
-        />
-      );
-    case "image":
-      return (
-        <ImageMessage
-          key={_id}
-          senderName={senderName}
-          content={content}
-          text={text}
-          timestamp={createdAt}
-          status={(message as any).status}
-        />
-      );
-    case "video":
-      return (
-        <VideoMessage
-          key={_id}
-          senderName={senderName}
-          content={content}
-          text={text}
-          timestamp={createdAt}
-          status={(message as any).status}
-        />
-      );
-    case "pdf":
-      return (
-        <PDFMessage
-          key={_id}
-          senderName={senderName}
-          content={content}
-          text={text}
-          timestamp={createdAt}
-          status={(message as any).status}
-        />
-      );
-    case "audio":
-      return (
-        <AudioMessage
-          key={_id}
-          senderName={senderName}
-          content={content}
-          text={text}
-          timestamp={createdAt}
-        />
-      );
-    default:
-      return null;
-  }
-}
-
 export default function ChatArea() {
   const { mutate: deleteMessage } = useDeleteMessage();
   const conversationId = useChatStore((state) => state.conversationId);
@@ -252,6 +171,93 @@ export default function ChatArea() {
   const handleDelete = (messageId: string) => {
     deleteMessage(messageId);
   };
+
+  function renderMessage(message: Message) {
+    const { senderId, text, type, content, createdAt, _id } = message;
+
+    // senderId object hai ya string?
+    const senderName =
+      typeof senderId === "object"
+        ? senderId.name // TanStack message → real name . // or sender ka naam
+        : "NeetAdvisor"; // Socket message → fallback
+    // 3 cases:
+    // 1. TanStack API → real sender name
+    // 2. Tera apna message → authStore.name
+    // 3. (future) agar socket object bheje → real name
+    // Socket string aaya → fallback
+
+    // delete check
+    if ((message as any).status === "deleted") {
+      return (
+        <DeletedMessage
+          key={_id}
+          senderName={senderName}
+          timestamp={createdAt}
+        />
+      );
+    }
+
+    switch (type) {
+      case "text":
+        return (
+          <TextMessage
+            key={_id}
+            senderName={senderName}
+            content={content}
+            text={text}
+            timestamp={createdAt}
+            status={(message as any).status}
+            messageId={_id} // ← add karo
+            onDelete={handleDelete} // ← add karo
+          />
+        );
+      case "image":
+        return (
+          <ImageMessage
+            key={_id}
+            senderName={senderName}
+            content={content}
+            text={text}
+            timestamp={createdAt}
+            status={(message as any).status}
+          />
+        );
+      case "video":
+        return (
+          <VideoMessage
+            key={_id}
+            senderName={senderName}
+            content={content}
+            text={text}
+            timestamp={createdAt}
+            status={(message as any).status}
+          />
+        );
+      case "pdf":
+        return (
+          <PDFMessage
+            key={_id}
+            senderName={senderName}
+            content={content}
+            text={text}
+            timestamp={createdAt}
+            status={(message as any).status}
+          />
+        );
+      case "audio":
+        return (
+          <AudioMessage
+            key={_id}
+            senderName={senderName}
+            content={content}
+            text={text}
+            timestamp={createdAt}
+          />
+        );
+      default:
+        return null;
+    }
+  }
   return (
     <div className="flex flex-col gap-4 p-4 h-full bg-gray-100/80 rounded-lg">
       {isLoading ? (

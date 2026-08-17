@@ -39,12 +39,14 @@ export default function TextMessage({
   text,
   timestamp,
   status,
+  messageId,
 }: {
   senderName: string;
   content: string;
   text: string;
   timestamp: string;
   status?: "sending" | "sent" | "failed"; // ← add karo
+  messageId: string;
 }) {
   return (
     <div className="flex gap-3 mb-4">
