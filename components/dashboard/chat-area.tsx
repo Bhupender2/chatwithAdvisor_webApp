@@ -16,6 +16,7 @@ import { useAuthStore } from "@/store/auth-store";
 import { getSocket } from "@/services/socket-service";
 import DeletedMessage from "./messages/message-delete";
 import { useDeleteMessage } from "@/hooks/mutations/useDeleteMessage";
+import { useQueryClient } from "@tanstack/react-query";
 
 interface Message {
   _id: string;
@@ -31,6 +32,9 @@ interface Message {
 }
 
 export default function ChatArea() {
+  const prevLiveMessageLength = useRef(0);
+
+  const queryClient = useQueryClient();
   const { mutate: deleteMessage } = useDeleteMessage();
   const conversationId = useChatStore((state) => state.conversationId);
   const [inputText, setInputText] = useState("");
@@ -110,9 +114,12 @@ export default function ChatArea() {
   // useffect
 
   useEffect(() => {
-    if (scrollRef.current) {
-      scrollRef.current.scrollTop = scrollRef.current.scrollHeight;
+    if (liveMessage.length > prevLiveMessageLength.current) {
+      if (scrollRef.current) {
+        scrollRef.current.scrollTop = scrollRef.current.scrollHeight;
+      }
     }
+    prevLiveMessageLength.current = liveMessage.length;
   }, [liveMessage]);
 
   const {
@@ -169,7 +176,17 @@ export default function ChatArea() {
   };
 
   const handleDelete = (messageId: string) => {
-    deleteMessage(messageId);
+    deleteMessage(messageId, {
+      onSuccess: () => {
+        updateMessageStatus(messageId, messageId, "deleted");
+        queryClient.invalidateQueries({
+          queryKey: ["previous_chat", conversationId],
+        });
+      },
+      onError: (error) => {
+        console.log("Delete error:", error);
+      },
+    });
   };
 
   function renderMessage(message: Message) {
