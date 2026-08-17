@@ -14,6 +14,7 @@ import { ChatEmptyState } from "./chat-empty-state";
 import { useState, useEffect, useRef } from "react";
 import { useAuthStore } from "@/store/auth-store";
 import { getSocket } from "@/services/socket-service";
+import DeletedMessage from "./messages/message-delete";
 
 interface Message {
   _id: string;
@@ -41,6 +42,11 @@ function renderMessage(message: Message) {
   // 2. Tera apna message → authStore.name
   // 3. (future) agar socket object bheje → real name
   // Socket string aaya → fallback
+
+  // delete check
+  if ((message as any).status === "deleted") {
+    return <DeletedMessage key={_id} />;
+  }
 
   switch (type) {
     case "text":
@@ -195,7 +201,11 @@ export default function ChatArea() {
     previousChats?.pages
       ?.slice()
       ?.reverse()
-      .flatMap((page) => page.messages) || [];
+      .flatMap((page) => page.messages)
+      .map((msg) => ({
+        ...msg,
+        status: msg.deletedForEveryone ? "deleted" : "sent",
+      })) || [];
 
   const handleSendText = () => {
     if (!inputText.trim()) return;
