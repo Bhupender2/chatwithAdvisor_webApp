@@ -237,6 +237,8 @@ export default function ChatArea() {
             text={text}
             timestamp={createdAt}
             status={(message as any).status}
+            messageId={_id} // ← add karo
+            onDelete={handleDelete} // ← add karo
           />
         );
       case "video":
@@ -248,6 +250,8 @@ export default function ChatArea() {
             text={text}
             timestamp={createdAt}
             status={(message as any).status}
+            messageId={_id} // ← add karo
+            onDelete={handleDelete} // ← add karo
           />
         );
       case "pdf":
@@ -259,6 +263,8 @@ export default function ChatArea() {
             text={text}
             timestamp={createdAt}
             status={(message as any).status}
+            messageId={_id} // ← add karo
+            onDelete={handleDelete} // ← add karo
           />
         );
       case "audio":
@@ -269,6 +275,8 @@ export default function ChatArea() {
             content={content}
             text={text}
             timestamp={createdAt}
+            messageId={_id} // ← add karo
+            onDelete={handleDelete} // ← add karo
           />
         );
       default:
