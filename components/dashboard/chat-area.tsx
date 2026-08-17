@@ -184,6 +184,7 @@ export default function ChatArea() {
         conversationId,
       });
       socket.off("conversation:new");
+      socket.off("message_deleted"); // off the socket
     };
   }, [conversationId]);
 
