@@ -9,7 +9,7 @@ export const loginUser = async (employeeData: EmployeeData) => {
 };
 
 export const logoutUser = async () => {
-  const accessToken = useAuthStore.getState().accessToken;
+  const accessToken = useAuthStore.getState().token;
   const response = await axios.post(
     API_GROUPS.logout,
     {},
