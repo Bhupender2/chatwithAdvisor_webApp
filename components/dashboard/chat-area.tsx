@@ -18,6 +18,7 @@ import DeletedMessage from "./messages/message-delete";
 import { useDeleteMessage } from "@/hooks/mutations/useDeleteMessage";
 import { useQueryClient } from "@tanstack/react-query";
 import { toast } from "sonner";
+import { AxiosError } from "axios";
 
 interface Message {
   _id: string;
@@ -186,7 +187,10 @@ export default function ChatArea() {
       },
       onError: (error) => {
         console.log("Delete error:", error);
-        toast.error(error.response.data.message ?? " Error deleting message");
+        toast.error(
+          (error as AxiosError<{ message: string }>)?.response?.data.message ??
+            " Error deleting message",
+        );
       },
     });
   };
