@@ -182,16 +182,16 @@ export default function ChatArea() {
       onSuccess: () => {
         // TanStack cache directly update karo
         queryClient.setQueryData(
-          ["previous_chat", conversationId],
+          ["previous_chat", conversationId], // which cache data i want to update
           (oldData: any) => {
-            if (!oldData) return oldData;
+            if (!oldData) return oldData; // old data is an object with pages as a key
             return {
               ...oldData,
               pages: oldData.pages.map((page: any) => ({
                 ...page,
                 messages: page.messages.map((msg: any) =>
                   msg._id === messageId
-                    ? { ...msg, deletedForEveryone: true }
+                    ? { ...msg, deletedForEveryone: true } //// whatever got matched just change its one key only if not then return the msg as it is
                     : msg,
                 ),
               })),
@@ -373,3 +373,14 @@ export default function ChatArea() {
 }
 
 //the parent component:does NOT render its own DOM element passes/injects its behavior + styling into child
+// // API Response Structure:
+// {
+//   pages: [
+//     {
+//       messages: [{ _id, content, type, deletedForEveryone, ... }],
+//       hasMore: true/false,
+//       nextCursor: "messageId" | null
+//     }
+//   ],
+//   pageParams: [...]
+// }
