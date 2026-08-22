@@ -325,31 +325,33 @@ export default function ChatArea() {
         <ChatEmptyState />
       )}
 
-      {/* Input */}
-      <div className="flex gap-2 items-center">
-        <AddDropDownMenu />
-        {/* Fix */}
-        <textarea
-          value={inputText}
-          onChange={(e) => setInputText(e.target.value)}
-          onKeyDown={(e) => {
-            if (e.key === "Enter" && !e.shiftKey) {
-              e.preventDefault();
-              handleSendText();
-            }
-          }}
-          rows={1}
-          placeholder="Type your message..."
-          className="flex-1 px-4 py-2 rounded-full border border-input bg-background text-foreground placeholder-muted-foreground focus:outline-none focus:ring-2 focus:ring-ring resize-none"
-        />
-        <button className="px-3 py-3 bg-green-700 text-primary-foreground rounded-full hover:bg-green-800 transition-colors font-medium">
-          {inputText.trim() ? (
-            <SendHorizonalIcon onClick={handleSendText} />
-          ) : (
-            <MicIcon />
-          )}
-        </button>
-      </div>
+      {role === "admin" && (
+        // input only shows to admin
+        <div className="flex gap-2 items-center">
+          <AddDropDownMenu />
+          {/* Fix */}
+          <textarea
+            value={inputText}
+            onChange={(e) => setInputText(e.target.value)}
+            onKeyDown={(e) => {
+              if (e.key === "Enter" && !e.shiftKey) {
+                e.preventDefault();
+                handleSendText();
+              }
+            }}
+            rows={1}
+            placeholder="Type your message..."
+            className="flex-1 px-4 py-2 rounded-full border border-input bg-background text-foreground placeholder-muted-foreground focus:outline-none focus:ring-2 focus:ring-ring resize-none"
+          />
+          <button className="px-3 py-3 bg-green-700 text-primary-foreground rounded-full hover:bg-green-800 transition-colors font-medium">
+            {inputText.trim() ? (
+              <SendHorizonalIcon onClick={handleSendText} />
+            ) : (
+              <MicIcon />
+            )}
+          </button>
+        </div>
+      )}
     </div>
   );
 }
