@@ -52,7 +52,7 @@ export default function ChatArea() {
   const token = useAuthStore((state) => state.token);
   const senderId = useAuthStore((state) => state.senderId);
   const name = useAuthStore((state) => state.name);
-  const role = useAuthStore((state) => state.role);
+  const appAccess = useAuthStore((state) => state.appAccess);
 
   // useeffect is addded here
 
@@ -325,7 +325,7 @@ export default function ChatArea() {
         <ChatEmptyState />
       )}
 
-      {role === "admin" && (
+      {appAccess === "admin" && (
         // input only shows to admin
         <div className="flex gap-2 items-center">
           <AddDropDownMenu />
