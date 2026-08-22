@@ -341,7 +341,7 @@ export default function ChatArea() {
         <ChatEmptyState />
       )}
 
-      {appAccess === "admin" && (
+      {(appAccess === "admin" || appAccess === "sr_advisor") && (
         // input only shows to admin
         <div className="flex gap-2 items-center">
           <AddDropDownMenu />
