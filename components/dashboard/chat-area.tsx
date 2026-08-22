@@ -35,8 +35,6 @@ interface Message {
 
 export default function ChatArea() {
   const prevLiveMessageLength = useRef(0);
-
-  const queryClient = useQueryClient();
   const { mutate: deleteMessage } = useDeleteMessage();
   const conversationId = useChatStore((state) => state.conversationId);
   const [inputText, setInputText] = useState("");
@@ -182,9 +180,6 @@ export default function ChatArea() {
     deleteMessage(messageId, {
       onSuccess: () => {
         updateMessageStatus(messageId, messageId, "deleted");
-        queryClient.invalidateQueries({
-          queryKey: ["previous_chat", conversationId],
-        });
       },
       onError: (error) => {
         console.log("Delete error:", error);
