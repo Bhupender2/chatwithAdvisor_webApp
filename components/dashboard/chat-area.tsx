@@ -41,6 +41,7 @@ export default function ChatArea() {
   const scrollRef = useRef<HTMLDivElement>(null);
   const [isRecording, setIsRecording] = useState(false); // to show if the recording is happening or not
   const [recordingTime, setIsRecordingTime] = useState(0); // for timing here
+  const queryClient = useQueryClient();
 
   const addMessage = useChatStore((state) => state.addMessage);
   const updateMessageStatus = useChatStore(
@@ -179,6 +180,25 @@ export default function ChatArea() {
   const handleDelete = (messageId: string) => {
     deleteMessage(messageId, {
       onSuccess: () => {
+        // TanStack cache directly update karo
+        queryClient.setQueryData(
+          ["previous_chat", conversationId],
+          (oldData: any) => {
+            if (!oldData) return oldData;
+            return {
+              ...oldData,
+              pages: oldData.pages.map((page: any) => ({
+                ...page,
+                messages: page.messages.map((msg: any) =>
+                  msg._id === messageId
+                    ? { ...msg, deletedForEveryone: true }
+                    : msg,
+                ),
+              })),
+            };
+          },
+        );
+        // Zustand bhi update karo liveMessages ke liye
         updateMessageStatus(messageId, messageId, "deleted");
       },
       onError: (error) => {
